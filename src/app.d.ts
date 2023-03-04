@@ -1,10 +1,20 @@
 
-export interface section<type, item> {
+export type sectionType =
+| 'education'
+| 'experience'
+| 'skills'
+| 'projects'
+| 'interests'
+| 'certificates'
+| 'basics'
+| 'custom_pills'
+| 'custom_info';
+export interface section<stype, item> {
 	id: string;
 	name: string;
-	type: type;
+	type: sType;
 	items: item[];
-	visible: true;
+	visible: boolean;
 }
 export interface EducationItem {
 	institution: string;
@@ -29,7 +39,7 @@ export interface ExperienceItem {
 	position: string;
 }
 
-export type Experience = section<'education', EducationItem>;
+export type Experience = section<'experience', ExperienceItem>;
 export interface SkillItem {
 	name: string;
 	id: string;
@@ -69,7 +79,7 @@ export interface CertificateItem {
 	id: string;
 }
 
-interface Resume {
+export interface Resume {
 	id: number;
 	name: string;
 	settings: {
@@ -78,6 +88,9 @@ interface Resume {
 	sections: {
 		basics: {
 			name: string;
+      id: "basics",
+      name: "basics",
+      type: "basics"
 			email: string;
 			phone: string;
 			photo: {
@@ -101,6 +114,6 @@ interface Resume {
 		projects: Project;
 		education: Education;
 		interests: Interest;
-		certifications: Certificate;
+		certificates: Certificate;
 	};
 }
