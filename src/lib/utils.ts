@@ -1,85 +1,259 @@
-import type { EducationItem, ExperienceItem, ProjectItem, Resume, sectionType, SkillItem } from '../app';
-import { resume } from './store';
-const blankEducation: EducationItem = {
-	id: '',
-	area: '',
-	degree: '',
-	institution: '',
-	start_date: '',
-	end_date: '',
-	grade: '',
-	summary: '',
-	url: '',
-};
-const blankExperience: ExperienceItem = {
-	id: '',
-	name: '',
-	position: '',
-	start_date: '',
-	end_date: '',
-	summary: '',
-	url: '',
-};
-const blankSkill: SkillItem = {
-	id: '',
-	name: '',
-};
+// import type {
+// 	EducationItem,
+// 	ExperienceItem,
+// 	ProjectItem,
+// 	Resume,
+// 	sectionType,
+// 	SkillItem,
+// } from '../app';
+import { all_resume, resume } from './store';
+import { browser } from '$app/environment';
 
-const blankProject: ProjectItem = {
-	description: '',
-	end_date: '',
-	id: '',
-	name: '',
-	start_date: '',
-	summary: '',
-	url: '',
-};
+import {
+	faBook,
+	faEarth,
+	faExpand,
+	faFaceAngry,
+	faWalkieTalkie,
+	faWorm,
+} from '@fortawesome/free-solid-svg-icons';
 
-const get_min_data = (name: string) =>{
-  return {
-    name,
-    id: name,
-    visible: true
-  }
-}
-export const get_blank_resume = (): Resume => {
-	const resume: Resume = {
-		id: Date.now(),
-		name: 'untitled',
-		settings: {
-			font: 'Dosis',
-		},
-    sections: {
-      experience : {
-        ...get_min_data("experience"),
-        type: "experience",
-        items : [blankExperience]
-
-      },
-      education: {
-        ...get_min_data("education"),
-        type: "education",
-        items: [blankEducation]
-      }
-    }
+/**
+ *
+ * create field
+ */
+export const cf = (label: string, placeholder = '', type = 'text', validation = undefined) => {
+	placeholder = placeholder.length === 0 ? label : placeholder;
+	return {
+		label,
+		placeholder,
+		type,
+		validation,
+		value: '',
 	};
+};
+
+export type sectionType =
+	| 'education'
+	| 'experience'
+	| 'skills'
+	| 'projects'
+	| 'interests'
+	| 'certificates'
+	| 'basics'
+	| 'custom_pills'
+	| 'custom_info';
+export type item = {
+	id: string;
+	fields: Field[];
+};
+export interface Section<sType> {
+	id: string;
+	name: string;
+	type: sType;
+	items: item[];
+	visible: boolean;
+	max_length: 'one' | 'many';
+}
+export type Field = ReturnType<typeof cf>;
+const get_unique_id = () => {
+	return Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+};
+const blankEducation = {
+	id: get_unique_id(),
+	fields: {
+		area: cf('Area'),
+		degree: cf('Degree'),
+		institution: cf('Institution'),
+		start_date: cf('Start Date'),
+		end_date: cf('End Date'),
+		grade: cf('End Date'),
+		summary: cf('Summary', 'Summary', 'textarea'),
+		url: cf('URL'),
+	},
+	visible: Boolean(true),
+};
+export type EducationItem = typeof blankEducation;
+const blankExperience = {
+	id: get_unique_id(),
+	fields: {
+		name: cf('Name'),
+		position: cf('Position'),
+		start_date: cf('Start Date'),
+		end_date: cf('End Date'),
+		summary: cf('Summary', 'Summary', 'textarea'),
+		url: cf('URL'),
+	},
+	visible: Boolean(true),
+};
+export type ExperienceItem = typeof blankExperience;
+const blankSkill = {
+	id: get_unique_id(),
+	fields: {
+		name: cf('Name'),
+	},
+	visible: Boolean(true),
+};
+export type SkillItem = typeof blankSkill;
+
+const blankProject = {
+	id: get_unique_id(),
+	fields: {
+		name: cf('Name'),
+		description: cf('Description'),
+		start_date: cf('Start Date'),
+		end_date: cf('End Date'),
+		url: cf('URL'),
+		summary: cf('Summary', 'Summary', 'textarea'),
+	},
+	visisble: Boolean(true),
+};
+
+const blankCertificate = {
+	id: get_unique_id(),
+	fields: {
+		name: cf('Name'),
+		issuer: cf('issuer'),
+		date: cf('Date'),
+		url: cf('URL'),
+		summary: cf('Summary', 'Summary', 'textarea'),
+	},
+	visisble: Boolean(true),
+};
+
+const blankSocialProfile = {
+	id: get_unique_id(),
+	fields: {
+		network: cf('Network'),
+		username: cf('Username'),
+		url: cf('URL'),
+	},
+	visible: Boolean(true),
+};
+const blankBasic = {
+	id: get_unique_id(),
+	fields: {},
+};
+export type ProjectItem = typeof blankProject;
+const get_min_data = (name: string) => {
+	return {
+		name,
+		type: name,
+		id: name,
+		visible: true,
+	};
+};
+export const blank_resume = {
+	id: get_unique_id(),
+	name: 'untitled',
+	settings: {
+		font: 'Dosis',
+	},
+	sections: [
+		{ ...get_min_data('Social Profile'), items: [blankSocialProfile] },
+		{
+			...get_min_data('Experience'),
+			items: [blankExperience],
+		},
+		{
+			...get_min_data('Education'),
+			items: [blankEducation],
+		},
+		{
+			...get_min_data('Project'),
+			items: [blankProject],
+		},
+		{
+			...get_min_data('Certificate'),
+			items: [blankCertificate],
+		},
+	],
+};
+export type Resume = typeof blank_resume;
+
+export const get_icon_from_section_type = (type: sectionType) => {
+	return {
+		experience: faExpand,
+		education: faBook,
+		project: faWorm,
+		certificate: faWalkieTalkie,
+		'social profile': faFaceAngry,
+	}[type.toLowerCase()];
+};
+export const add_blank_resume = (): Resume => {
+	const resume_data = get_all_resume_arr();
+	resume_data.push(blank_resume);
+	update_all_resume(resume_data);
+	return blank_resume;
+};
+
+export const update_ls_resume = (resume: Resume) => {
+	console.log('Update ls resume', { resume });
+	if (!resume) {
+		return;
+	}
+	if (browser) {
+		const data = localStorage.getItem('all_resume');
+		let resume_data: Resume[] = [];
+		if (!data) {
+			localStorage.setItem('all_resume', JSON.stringify({}));
+			resume_data = [];
+		} else {
+			resume_data = JSON.parse(data);
+		}
+		console.log({ resume_data });
+		const index = resume_data.findIndex((item) => item.id === resume.id);
+
+		resume_data[index] = resume;
+		update_all_resume(resume_data);
+	}
+};
+
+export const update_all_resume = (data: Resume[]) => {
+	localStorage.setItem('all_resume', JSON.stringify(data));
+	all_resume.set(data);
+};
+export const get_ls_resume = (id: number): Resume | undefined => {
+	const resume_data = get_all_resume_arr();
+	console.log({ all_reusme: resume_data, id });
+	const resume = resume_data.find((item) => item.id === id);
 	return resume;
 };
 
+export const remove_resume_from_ls = (id: number) => {
+	if (browser) {
+		let resume_data = get_all_resume_arr();
+		resume_data = resume_data.filter((resume) => resume.id !== id);
+		update_all_resume(resume_data);
+	}
+};
+export const get_all_resume_arr = (): Resume[] => {
+	let resume_data = [];
+	if (browser) {
+		const data = localStorage.getItem('all_resume');
+		if (!data) {
+			localStorage.setItem('all_resume', JSON.stringify([]));
+			resume_data = [];
+		} else {
+			resume_data = JSON.parse(data);
+		}
+	}
+	return resume_data;
+};
 
 export const removeItem = (section: sectionType, id: string) => {
+	console.log({ section, id });
 	resume.update((val) => {
-		val.sections[section]?.items?.filter((item) => {
-			item.id !== id;
+		console.log({ items: val.sections[section].items, id });
+		val.sections[section].items = val.sections[section]?.items.filter((item) => {
+			return item.id !== id;
 		});
 		return val;
 	});
 };
 
-export const addItem = (sectionType: sectionType, name: sectionType | '' = '') => {
-	//sectionName can be different than sectiontype in case of custom type
-	const sectionName: sectionType = name === '' ? sectionType : name;
-	const item: Record<sectionType, Record<string,any>> = {
+export const get_blank_section_item = (type: sectionType) => {
+	const item: Record<sectionType, Record<string, any>> = {
 		education: blankEducation,
 		experience: blankExperience,
 		skills: blankSkill,
@@ -90,8 +264,30 @@ export const addItem = (sectionType: sectionType, name: sectionType | '' = '') =
 		certificates: {},
 		interests: {},
 	};
+	const section = item[type];
+	section.id = get_unique_id();
+	return section;
+};
+export const addItem = (sectionName: string) => {
+	//sectionName can be different than sectiontype in case of custom type
+
 	resume.update((val) => {
-		val.sections[sectionName].items.push(item);
+		const section = val.sections[sectionName];
+		const section_item = get_blank_section_item(section.type);
+		console.log({ section_item });
+		section.items.push(section_item);
+		console.log({ items: section.items });
 		return val;
 	});
 };
+
+// export const getComponent = (type: sectionType) => {
+// 	return {
+// 		experience: Experience,
+// 		education: Education,
+// 	}[type];
+// };
+
+// resume.update(() => {
+// 	return blank_resume;
+// });

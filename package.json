@@ -1,5 +1,5 @@
 {
-	"name": "alpha-resume",
+	"name": "ezresume",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -27,5 +27,9 @@
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@fortawesome/free-solid-svg-icons": "^6.3.0",
+		"svelte-fa": "^3.0.3"
+	}
 }
