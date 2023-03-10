@@ -5,19 +5,17 @@
 	import { addItem, removeItem } from '$lib/utils';
 	// console.log({ resume: $resume });
 
-
-
 	export let section: Section<any>;
-  
-  console.log({section})
+
+	console.log({ section });
 </script>
 
 <div>
-	<div class="m-6 bg-white rounded-xl border-solid border border-gray-300" id="Education">
-		<h2 class="border-b border-solid  border-gray-300 px-6 py-4 text-xl font-semibold">
+	<div class="m-5 bg-white rounded-xl border-solid border border-gray-300" id="Education">
+		<h2 class="border-b border-solid border-gray-300 px-4 py-3 text-lg font-semibold">
 			{section.name}
 		</h2>
-		<div class="flex flex-col p-6  ">
+		<div class="flex flex-col p-5">
 			{#each section.items as { fields, id }}
 				{#each Object.values(fields) as field}
 					{#if field.type === 'text'}
@@ -46,8 +44,8 @@
 				{/each}
 				<!-- {#if $resume.educations.length > 0}  -->
 				<button
-					on:click={() => removeItem(section.id,id)}
-					id={id}
+					on:click={() => removeItem(section.id, id)}
+					{id}
 					class=" mb-2 flex justify-center items-center gap-2 py-1 px-4 rounded-full text-red-700 border border-solid border-red-700 rb-button hover:text-white hover:bg-red-700 transition"
 				>
 					<Fa icon={faTrash} class=" text-red-700 " />Remove Education</button

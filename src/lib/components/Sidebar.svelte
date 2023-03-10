@@ -39,17 +39,17 @@
 	// };
 </script>
 
-<div class="flex w-2/5 border-solid border-r border-gray-300 h-screen" id="sidebar">
-	<div class=" w-2/5 border-2 bg-gray-100 ">
-		<ul>
+<div class="flex w-5/12 overflow-y-auto " id="sidebar">
+	<div class=" w-2/5 border-r border-solid border-gray-300 bg-white max-h-[91vh]">
+		<ul class="py-5 px-2 flex flex-col gap-2">
 			{#each $resume.sections as section, i}
-				<li class:bg-blue-100={index === i}>
+				<li class="rounded" class:bg-blue-100={index === i}>
 					<a
-						class=" flex btn btn-ghost w-full  gap-4 py-2    hover:text-blue-700 hover:bg-blue-200  focus:text-blue-700 focus:bg-blue-900 font-medium text-gray-700 "
+						class="rounded cursor-pointer w-full flex items-center gap-3 py-3 px-4  focus:text-blue-700 focus:bg-blue-50 focus:rounded  hover:text-blue-700 hover:bg-blue-50 hover:rounded text-gray-700 font-normal"
 						on:click={() => (index = i)}
 						><Fa
 							icon={get_icon_from_section_type(section.type)}
-							class="focus:text-blue-700 text-sm text-gray-700 self-center pl-4"
+							class="focus:text-blue-700 text-sm text-gray-700 self-center "
 						/>
 						<div class=" ">{section.name}</div></a
 					>
@@ -58,11 +58,13 @@
 		</ul>
 	</div>
 	<!-- {#each Object.keys(resume.sections) as section, i}
-			<button class="px-4 py-3 border-2 block w-full">{section}</button
+			<button class="px-4 py-3 border-r border-solid border-gray-300 block w-full">{section}</button
 			>
 		{/each} -->
 
-	<div class="flex-grow border-2 ring overflow-scroll">
+	<div
+		class="flex-grow border-r border-solid border-gray-300 overflow-auto max-h-[91vh] bg-gray-50"
+	>
 		{#key focused.id}
 			<div
 				class=" w-full"
