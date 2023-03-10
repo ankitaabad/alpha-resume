@@ -1,12 +1,18 @@
 <script lang="ts">
-	import type { Field, Section } from '$lib/utils';
+	import { get_blank_section_item, type Field, type Section } from '$lib/utils';
 	import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { addItem, removeItem } from '$lib/utils';
+	import {  removeItem } from '$lib/utils';
 	// console.log({ resume: $resume });
 
 	export let section: Section<any>;
 
+	export const addItem = () => {
+		const item_to_add = get_blank_section_item(section?.type);
+    console.log([...section.items,item_to_add])
+    section.items = [...section.items,item_to_add]
+    console.log(section.items)
+	};
 	console.log({ section });
 </script>
 
@@ -55,7 +61,7 @@
 
 			<button
 				class=" flex justify-center items-center gap-2 py-1 px-4 rounded-full text-blue-700 border border-solid border-blue-700 rb-button hover:text-white hover:bg-blue-700 transition"
-				on:click={() => addItem(section.name)}
+				on:click={() => addItem()}
 			>
 				<Fa icon={faAdd} class="focus:text-blue-700  text-blue-700 " />Add Education</button
 			>

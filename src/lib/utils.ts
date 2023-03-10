@@ -42,7 +42,8 @@ export type sectionType =
 	| 'certificates'
 	| 'basics'
 	| 'custom_pills'
-	| 'custom_info';
+	| 'custom_info'
+	| 'social profile';
 export type item = {
 	id: string;
 	fields: Field[];
@@ -160,7 +161,7 @@ export const blank_resume = {
 			items: [blankEducation],
 		},
 		{
-			...get_min_data('Project'),
+			...get_min_data('Projects'),
 			items: [blankProject],
 		},
 		{
@@ -175,7 +176,7 @@ export const get_icon_from_section_type = (type: sectionType) => {
 	return {
 		experience: faExpand,
 		education: faBook,
-		project: faWorm,
+		projects: faWorm,
 		certificate: faWalkieTalkie,
 		'social profile': faFaceAngry,
 	}[type.toLowerCase()];
@@ -212,7 +213,8 @@ export const update_ls_resume = (resume: Resume) => {
 export const update_all_resume = (data: Resume[]) => {
 	localStorage.setItem('all_resume', JSON.stringify(data));
 	all_resume.update(() => {
-    return data});
+		return data;
+	});
 };
 export const get_ls_resume = (id: number): Resume | undefined => {
 	const resume_data = get_all_resume_arr();
@@ -222,11 +224,11 @@ export const get_ls_resume = (id: number): Resume | undefined => {
 };
 
 export const remove_resume_from_ls = (id: number) => {
-  console.log("removing resume from arr", id)
+	console.log('removing resume from arr', id);
 	if (browser) {
 		let resume_data = get_all_resume_arr();
 		resume_data = resume_data.filter((resume) => resume.id !== id);
-    console.log({resume_data})
+		console.log({ resume_data });
 		update_all_resume(resume_data);
 	}
 };
@@ -244,13 +246,13 @@ export const get_all_resume_arr = (): Resume[] => {
 	return resume_data;
 };
 
-export const removeItem = (section_id,item_id) => {
+export const removeItem = (section_id, item_id) => {
 	console.log({ section_id, item_id });
 	resume.update((val) => {
-		const section_to_delete = val.sections.find(section => section.id === section_id)
-    console.log({section_to_delete})
-    section_to_delete.items = section_to_delete?.items.filter(item => item.id != item_id)
-		
+		const section_to_delete = val.sections.find((section) => section.id === section_id);
+		console.log({ section_to_delete });
+		section_to_delete.items = section_to_delete?.items.filter((item) => item.id != item_id);
+
 		return val;
 	});
 };
@@ -261,28 +263,18 @@ export const get_blank_section_item = (type: sectionType) => {
 		experience: blankExperience,
 		skills: blankSkill,
 		projects: blankProject,
+		'social profile': blankSocialProfile,
 		basics: {},
 		custom_info: {},
 		custom_pills: {},
 		certificates: {},
 		interests: {},
 	};
-	const section = item[type];
-	section.id = get_unique_id();
-	return section;
+	const sectionItem = item[type.toLowerCase()];
+	sectionItem.id = get_unique_id();
+	return sectionItem;
 };
-export const addItem = (sectionName: string) => {
-	//sectionName can be different than sectiontype in case of custom type
 
-	resume.update((val) => {
-		const section = val.sections[sectionName];
-		const section_item = get_blank_section_item(section.type);
-		console.log({ section_item });
-		section.items.push(section_item);
-		console.log({ items: section.items });
-		return val;
-	});
-};
 
 // export const getComponent = (type: sectionType) => {
 // 	return {
