@@ -4,7 +4,7 @@
 	import { add_blank_resume, get_all_resume_arr, remove_resume_from_ls } from '$lib/utils';
 	import NavBar from '$lib/components/NavBar.svelte';
 	import { goto } from '$app/navigation';
-  const all_resume =  get_all_resume_arr()
+	import { all_resume } from '$lib/store';
   const add_new_resume = () => {
     const new_resume = add_blank_resume();
     const path = `/resume/${new_resume.id}`
@@ -31,7 +31,7 @@
 				</a>
 			</div>
 			<div class="grid grid-cols-3">
-        {#each all_resume as {name,id}}
+        {#each $all_resume as {name,id}}
 				<div class="grid grid-cols-2 gap-6 items-center">
 					<div class="bg-white h-80" />
 					<div>

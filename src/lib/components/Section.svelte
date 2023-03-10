@@ -46,7 +46,7 @@
 				{/each}
 				<!-- {#if $resume.educations.length > 0}  -->
 				<button
-					on:click={() => removeItem('education', id)}
+					on:click={() => removeItem(section.id,id)}
 					id={id}
 					class=" mb-2 flex justify-center items-center gap-2 py-1 px-4 rounded-full text-red-700 border border-solid border-red-700 rb-button hover:text-white hover:bg-red-700 transition"
 				>

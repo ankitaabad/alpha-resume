@@ -69,7 +69,7 @@
 				out:fly={{ y: -20, duration: 400 }}
 				in:fly={{ delay: 410, duration: 400, y: 50, easing: quintOut }}
 			>
-				<Section section={focused} />
+				<Section bind:section={$resume.sections[index]} />
 			</div>
 		{/key}
 	</div>

@@ -211,7 +211,8 @@ export const update_ls_resume = (resume: Resume) => {
 
 export const update_all_resume = (data: Resume[]) => {
 	localStorage.setItem('all_resume', JSON.stringify(data));
-	all_resume.set(data);
+	all_resume.update(() => {
+    return data});
 };
 export const get_ls_resume = (id: number): Resume | undefined => {
 	const resume_data = get_all_resume_arr();
@@ -221,9 +222,11 @@ export const get_ls_resume = (id: number): Resume | undefined => {
 };
 
 export const remove_resume_from_ls = (id: number) => {
+  console.log("removing resume from arr", id)
 	if (browser) {
 		let resume_data = get_all_resume_arr();
 		resume_data = resume_data.filter((resume) => resume.id !== id);
+    console.log({resume_data})
 		update_all_resume(resume_data);
 	}
 };
@@ -241,13 +244,13 @@ export const get_all_resume_arr = (): Resume[] => {
 	return resume_data;
 };
 
-export const removeItem = (section: sectionType, id: string) => {
-	console.log({ section, id });
+export const removeItem = (section_id,item_id) => {
+	console.log({ section_id, item_id });
 	resume.update((val) => {
-		console.log({ items: val.sections[section].items, id });
-		val.sections[section].items = val.sections[section]?.items.filter((item) => {
-			return item.id !== id;
-		});
+		const section_to_delete = val.sections.find(section => section.id === section_id)
+    console.log({section_to_delete})
+    section_to_delete.items = section_to_delete?.items.filter(item => item.id != item_id)
+		
 		return val;
 	});
 };
