@@ -72,8 +72,14 @@ function create_all_resume() {
 			ar.push(blank_resume);
 			return ar;
 		});
-		const path = `/resume/${blank_resume.id}`;
-		goto(path);
+    resume_id.set(blank_resume.id)
+		goto('/resume');
+	};
+
+  const edit_resume = (id) => {
+		console.log('editing resume');
+		resume_id.set(id)
+		goto('/resume');
 	};
 	const get_resume_index = () => {
 		return get(store).findIndex((resume) => resume.id === get(resume_id));
@@ -90,6 +96,7 @@ function create_all_resume() {
 		no_of_sections,
 		get_resume,
 		get_resume_index,
+    edit_resume
 	};
 }
 

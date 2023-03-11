@@ -33,10 +33,10 @@
 								<span>2:27:06 PM</span>
 							</div>
 							<div class="flex flex-col gap-4 mb-8 text-base">
-								<div class="flex items-center gap-2">
+								<button class="flex items-center gap-2 hover:text-blue-700 hover:transition" 	on:click={() => store.edit_resume(id)}>
 									<Fa icon={faEdit} class="text-gray-700" />
-									<a href="/resume/{id}" class="hover:text-blue-700 hover:transition ">Edit</a>
-								</div>
+									<div class=" ">Edit</div>
+                </button>
 								<div class="flex items-center gap-2">
 									<Fa icon={faCopy} class="text-gray-700 " />
 									<a href="/" class="hover:text-blue-700 hover:transition ">Duplicate</a>
