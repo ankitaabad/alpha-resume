@@ -1,17 +1,9 @@
 <script>
 	import { faAdd, faEdit, faCopy, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { add_blank_resume, get_all_resume_arr, remove_resume_from_ls } from '$lib/utils';
 	import NavBar from '$lib/components/NavBar.svelte';
-	import { goto } from '$app/navigation';
-	import { all_resume } from '$lib/store';
-	const add_new_resume = () => {
-		const new_resume = add_blank_resume();
-		const path = `/resume/${new_resume.id}`;
-		console.log({ path });
-
-		goto(path);
-	};
+	import { store } from '$lib/store';
+	
 </script>
 
 <div class="flex flex-col h-screen ">
@@ -23,7 +15,7 @@
 			<div class="flex items-center justify-between w-full mb-6">
 				<h1 class="text-2xl font-semibold text-gray-900">My Resume</h1>
 				<a
-					on:click={add_new_resume}
+					on:click={() => store.add_resume()}
 					class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
 				>
 					<Fa icon={faAdd} class="text-white " />
@@ -31,7 +23,7 @@
 				</a>
 			</div>
 			<div class="grid grid-cols-3">
-				{#each $all_resume as { name, id }}
+				{#each $store as { name, id }}
 					<div class="grid grid-cols-2 gap-6 items-center">
 						<div class="bg-white h-80" />
 						<div>
@@ -51,7 +43,7 @@
 								</div>
 								<div
 									class="flex items-center gap-2 cursor-pointer"
-									on:click={() => remove_resume_from_ls(id)}
+									on:click={() => store.delete_resume(id)}
 								>
 									<Fa icon={faTrashAlt} class="text-gray-700 " />
 									<a class="hover:text-blue-700 hover:transition ">Delete</a>

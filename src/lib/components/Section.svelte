@@ -1,25 +1,18 @@
 <script lang="ts">
-	import { get_blank_section_item, type Field, type Section } from '$lib/utils';
 	import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import {  removeItem } from '$lib/utils';
-	// console.log({ resume: $resume });
-
+	import { store } from '$lib/store';
+	import type { Section } from '$lib/utils';
+	export let section_index: number;
 	export let section: Section<any>;
-
-	export const addItem = () => {
-		const item_to_add = get_blank_section_item(section?.type);
-    console.log([...section.items,item_to_add])
-    section.items = [...section.items,item_to_add]
-    console.log(section.items)
-	};
-	console.log({ section });
+	let resume_index = store.get_resume_index();
+	let section_name = section.name;
 </script>
 
 <div>
 	<div class="m-5 bg-white rounded-xl border-solid border border-gray-300" id="Education">
 		<h2 class="border-b border-solid border-gray-300 px-4 py-3 text-lg font-semibold">
-			{section.name}
+			{section_name}
 		</h2>
 		<div class="flex flex-col p-5">
 			{#each section.items as { fields, id }}
@@ -50,20 +43,19 @@
 				{/each}
 				<!-- {#if $resume.educations.length > 0}  -->
 				<button
-					on:click={() => removeItem(section.id, id)}
-					{id}
+					on:click={() => store.remove_section_item(section.id,id)}
 					class=" mb-2 flex justify-center items-center gap-2 py-1 px-4 rounded-full text-red-700 border border-solid border-red-700 rb-button hover:text-white hover:bg-red-700 transition"
 				>
-					<Fa icon={faTrash} class=" text-red-700 " />Remove Education</button
+					<Fa icon={faTrash} class=" text-red-700 " />Remove {section_name}</button
 				>
 				<!-- {/if} -->
 			{/each}
 
 			<button
 				class=" flex justify-center items-center gap-2 py-1 px-4 rounded-full text-blue-700 border border-solid border-blue-700 rb-button hover:text-white hover:bg-blue-700 transition"
-				on:click={() => addItem()}
+				on:click={() => store.add_section_item(section.id)}
 			>
-				<Fa icon={faAdd} class="focus:text-blue-700  text-blue-700 " />Add Education</button
+				<Fa icon={faAdd} class="focus:text-blue-700  text-blue-700 " />Add {section_name}</button
 			>
 		</div>
 	</div>
