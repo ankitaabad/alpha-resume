@@ -1,5 +1,5 @@
 <script>
-	import { get_icon_from_section_type } from '$lib/utils';
+	import { get_icon_from_section_type, get_resume_index, no_of_sections } from '$lib/utils';
 	import { fade, blur, fly, slide, scale,draw } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -9,7 +9,7 @@
 	import Section from './Section.svelte';
 	onMount(() => {
 		document.onkeydown = (e) => {
-			const len = store.no_of_sections()
+			const len = no_of_sections()
 			var activeElement = document.activeElement;
 
 			if (
@@ -30,7 +30,7 @@
 		};
 	});
 	let index = 0;
-  let resume_index = store.get_resume_index()
+  let resume_index = get_resume_index()
 	$: focused = $store[resume_index].sections[index];
 
 </script>

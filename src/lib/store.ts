@@ -5,14 +5,14 @@ import {
 	get_all_resume_arr,
 	get_blank_resume,
 	get_blank_section_item,
-	type Resume,
+	get_resume,
 	type Section,
 } from './utils';
 export const resume_id = writable(0);
 
 function create_all_resume() {
 	const resumes = get_all_resume_arr();
-	const { subscribe, set, update } = writable(resumes);
+	const { subscribe,  update } = writable(resumes);
 
 	const add_section_item = (section_id) => {
 		update((ar) => {
@@ -25,17 +25,7 @@ function create_all_resume() {
 			return ar;
 		});
 	};
-	const get_resume = () => {
-		const rid = get(resume_id);
-		return get(store).find((resume) => resume.id === rid) as Resume;
-	};
-	const no_of_sections = (): number => {
-		return get_resume().sections.length;
-	};
-
-	const no_of_resumes = (): number => {
-		return get(store).length;
-	};
+	
 	const remove_section_item = (section_id, item_id) => {
 		update((ar) => {
 			const rid = get(resume_id);
@@ -81,9 +71,7 @@ function create_all_resume() {
 		resume_id.set(id)
 		goto('/resume');
 	};
-	const get_resume_index = () => {
-		return get(store).findIndex((resume) => resume.id === get(resume_id));
-	};
+	
 
 	return {
 		subscribe,
@@ -92,10 +80,6 @@ function create_all_resume() {
 		update_section_item,
 		add_resume,
 		delete_resume,
-		no_of_resumes,
-		no_of_sections,
-		get_resume,
-		get_resume_index,
     edit_resume
 	};
 }

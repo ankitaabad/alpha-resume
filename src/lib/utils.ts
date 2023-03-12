@@ -1,13 +1,17 @@
-
 import { browser } from '$app/environment';
 
 import {
+  faBahai,
 	faBook,
 	faExpand,
 	faFaceAngry,
+	faFaceGrinSquint,
+	faLocation,
 	faWalkieTalkie,
 	faWorm,
 } from '@fortawesome/free-solid-svg-icons';
+import { get } from 'svelte/store';
+import { resume_id, store } from './store';
 
 /**
  * create field
@@ -30,6 +34,7 @@ export type sectionType =
 	| 'projects'
 	| 'interests'
 	| 'certificates'
+  | 'location'
 	| 'basics'
 	| 'custom_pills'
 	| 'custom_info'
@@ -123,7 +128,7 @@ export const get_blank_certificate = () => {
 	};
 };
 
-export type CertificateItem = ReturnType<typeof get_blank_certificate>
+export type CertificateItem = ReturnType<typeof get_blank_certificate>;
 
 const get_blank_social_profile = () => {
 	return {
@@ -137,16 +142,43 @@ const get_blank_social_profile = () => {
 	};
 };
 export type SocialProfileItem = ReturnType<typeof get_blank_social_profile>;
-const blankBasic = {
-	id: get_unique_id(),
-	fields: {},
+
+const get_blank_basic = () => {
+	return {
+		id: get_unique_id(),
+		fields: {
+			photo: cf('Profile Picture', 'Image', 'image'),
+			name: cf('Name'),
+			email: cf('Email'),
+			phone: cf('Phone'),
+			summary: cf('Summary'),
+		},
+		visible: Boolean(true),
+	};
 };
-const get_min_data = (name: string) => {
+export type BasicItem = ReturnType<typeof get_blank_basic>;
+
+export const get_blank_location = () => {
+	return {
+		id: get_unique_id(),
+		fields: {
+			city: cf('City'),
+			region: cf('Region'),
+			address: cf('Address'),
+			country: cf('Country'),
+			postalCode: cf('Postal Code'),
+		},
+	};
+};
+export type LocationItem = ReturnType<typeof get_blank_location>;
+
+const get_min_data = (name: string,max="Many") => {
 	return {
 		name,
 		type: name,
 		id: name,
 		visible: true,
+    max
 	};
 };
 export const get_blank_resume = () => {
@@ -157,6 +189,8 @@ export const get_blank_resume = () => {
 			font: 'Dosis',
 		},
 		sections: [
+      {...get_min_data('Basic',"One"),items: [get_blank_basic()]},
+      {...get_min_data('Location','One'),items: [get_blank_location()]},
 			{ ...get_min_data('Social Profile'), items: [get_blank_social_profile()] },
 			{
 				...get_min_data('Experience'),
@@ -171,9 +205,10 @@ export const get_blank_resume = () => {
 				items: [get_blank_project()],
 			},
 			{
-				...get_min_data('Certificate'),
+				...get_min_data('Certificates'),
 				items: [get_blank_certificate()],
 			},
+      {...get_min_data("Skills"), items: [get_blank_skill()]}
 		],
 	};
 };
@@ -186,17 +221,12 @@ export const get_icon_from_section_type = (type: sectionType) => {
 		projects: faWorm,
 		certificate: faWalkieTalkie,
 		'social profile': faFaceAngry,
-	}[type.toLowerCase()];
+
+    'location' : faLocation,
+    'basic': faBahai,
+    
+	}[type.toLowerCase()] || faFaceGrinSquint;
 };
-
-export const get_ls_resume = (id: number): Resume | undefined => {
-	const resume_data = get_all_resume_arr();
-	console.log({ all_reusme: resume_data, id });
-	const resume = resume_data.find((item) => item.id === id);
-	return resume;
-};
-
-
 export const get_all_resume_arr = (): Resume[] => {
 	let resume_data = [];
 	if (browser) {
@@ -209,18 +239,27 @@ export const get_all_resume_arr = (): Resume[] => {
 	}
 	return resume_data;
 };
+export const get_ls_resume = (id: number): Resume | undefined => {
+	const resume_data = get_all_resume_arr();
+	console.log({ all_reusme: resume_data, id });
+	const resume = resume_data.find((item) => item.id === id);
+	return resume;
+};
+
+
 
 export const get_blank_section_item = (type: sectionType) => {
 	const item: Record<sectionType, Record<string, any>> = {
 		education: get_blank_education(),
-		experience: get_blank_certificate(),
+		experience: get_blank_experience(),
 		skills: get_blank_skill(),
 		projects: get_blank_project(),
 		'social profile': get_blank_social_profile(),
-		basics: {},
+		basics: get_blank_basic(),
+    location: get_blank_location(),
+		certificates: get_blank_certificate(),
 		custom_info: {},
 		custom_pills: {},
-		certificates: get_blank_certificate(),
 		interests: {},
 	};
 	const sectionItem = item[type.toLowerCase()];
@@ -228,3 +267,33 @@ export const get_blank_section_item = (type: sectionType) => {
 	return { ...sectionItem };
 };
 
+export const get_resume = () => {
+	const rid = get(resume_id);
+	return get(store).find((resume) => resume.id === rid) as Resume;
+};
+export const no_of_sections = (): number => {
+	return get_resume().sections.length;
+};
+
+export const no_of_resumes = (): number => {
+	return get(store).length;
+};
+export const get_resume_index = () => {
+	return get(store).findIndex((resume) => resume.id === get(resume_id));
+};
+// export const get_resume_data_for_preview() => {
+//   const resume = get_resume();
+//   const result = {}
+//   resume.sections.forEach(section => {
+//     if(section.type === "custom") {
+
+//     }else {
+//       result[section.type] = section.items.map(item => {
+//         const data = {}
+//         Object.values(item.fields).forEach(k=> {
+//           data[k.label] = k.value
+//         })
+//       })
+//     }
+//   })
+// }
