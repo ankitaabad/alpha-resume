@@ -1,4 +1,9 @@
 <script>
+	import { profile_store, resume_id } from "$lib/store";
+	import { get_profile } from "$lib/utils";
+	import { get } from "svelte/store";
+  $: profile = $profile_store[get(resume_id)]
+  $: console.log({"type":profile?.type})
 	let src = './favicon.png';
 </script>
 
@@ -115,9 +120,9 @@
 			<!-- header -->
 			<div class="flex border-b border-solid border-gray-300 pb-6 gap-6">
 				<div
-					class="aspect-square w-36 h-36 bg-gray-200 flex items-center justify-center rounded-lg"
+					class="aspect-square w-36 h-36 bg-transparent flex items-center justify-center rounded-lg"
 				>
-					Profie
+					<img src = {profile?.image}  class:rounded-full={profile?.type ==="round"} alt="profile"/>
 				</div>
 				<div class="profile-details w-full">
 					<h1 class="text-2xl font-bold ">Hitesh Kumawat</h1>
