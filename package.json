@@ -30,6 +30,8 @@
 	"type": "module",
 	"dependencies": {
 		"@fortawesome/free-solid-svg-icons": "^6.3.0",
-		"svelte-fa": "^3.0.3"
+		"svelte-easy-crop": "^2.0.1",
+		"svelte-fa": "^3.0.3",
+		"svelte-quill": "^1.2.0"
 	}
 }

@@ -11,7 +11,7 @@ import {
 	faWorm,
 } from '@fortawesome/free-solid-svg-icons';
 import { get } from 'svelte/store';
-import { resume_id, store } from './store';
+import { profile_store, resume_id, store, type Profile } from './store';
 
 /**
  * create field
@@ -151,7 +151,7 @@ const get_blank_basic = () => {
 			name: cf('Name'),
 			email: cf('Email'),
 			phone: cf('Phone'),
-			summary: cf('Summary'),
+			summary: cf('Summary',"Summary","textarea"),
 		},
 		visible: Boolean(true),
 	};
@@ -239,6 +239,19 @@ export const get_all_resume_arr = (): Resume[] => {
 	}
 	return resume_data;
 };
+
+export const get_all_profiles = (): Record<string,Profile> => {
+	let image_data = {};
+	if (browser) {
+		const data = localStorage.getItem('all_profiles');
+		if (!data) {
+			localStorage.setItem('all_profiles', JSON.stringify({}));
+		} else {
+			image_data = JSON.parse(data);
+		}
+	}
+	return image_data;
+};
 export const get_ls_resume = (id: number): Resume | undefined => {
 	const resume_data = get_all_resume_arr();
 	console.log({ all_reusme: resume_data, id });
@@ -271,6 +284,11 @@ export const get_resume = () => {
 	const rid = get(resume_id);
 	return get(store).find((resume) => resume.id === rid) as Resume;
 };
+
+export const get_profile = () => {
+  const rid = get(resume_id)
+  return get(profile_store)[rid]
+}
 export const no_of_sections = (): number => {
 	return get_resume().sections.length;
 };
