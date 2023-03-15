@@ -1,4 +1,5 @@
 <script>
+	import { download } from '$lib/store';
 	import {
 		faUserNinja,
 		faSignIn,
@@ -53,7 +54,7 @@
 		</button>
 		<button
 			class="bg-blue-700 py-1 px-4 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600"
-			><Fa icon={faDownload} /> Download
+			 on:click={() => download()}><Fa icon={faDownload} /> Download
 		</button>
 	</div>
 </div>

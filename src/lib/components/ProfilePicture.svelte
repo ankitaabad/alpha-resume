@@ -1,5 +1,7 @@
 <script>
 	import { imageCropWindowDisplay } from '$lib/store';
+	import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	let avatar, fileinput;
   let image
 	import MyWindowComponent from './MyWindowComponent.svelte';
@@ -27,16 +29,12 @@
 {/if}
 <div class="form-group flex flex-col gap-1 mb-4 w-5/12">
 	<div
-		class=" flex items-center justify-center p-5 rounded-lg border border-solid border-gray-400  h-full w-full cursor-pointer"
+		class=" flex items-center justify-center p-5 rounded-lg border border-solid border-gray-400  h-full w-full cursor-pointer text-4xl  active:text-3xl shadow-lg"
 		on:click={() => {
 			fileinput.click();
 		}}
-	>
-		<img
-			class="upload w-16"
-			src="https://static.thenounproject.com/png/625182-200.png"
-			alt="Profile Picture"
-		/>
+	>	
+    <Fa icon={  faArrowUpFromBracket    } class=""/>
 	</div>
 	<input
 		style="display:none"

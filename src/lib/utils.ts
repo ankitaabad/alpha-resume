@@ -1,17 +1,19 @@
-import { browser } from '$app/environment';
+// import { browser } from '$app/environment';
 
 import {
   faBahai,
 	faBook,
 	faExpand,
+	faF,
 	faFaceAngry,
 	faFaceGrinSquint,
+	faL,
+	faLink,
 	faLocation,
+	faPhone,
 	faWalkieTalkie,
 	faWorm,
 } from '@fortawesome/free-solid-svg-icons';
-import { get } from 'svelte/store';
-import { profile_store, resume_id, store, type Profile } from './store';
 
 /**
  * create field
@@ -149,8 +151,10 @@ const get_blank_basic = () => {
 		fields: {
 			photo: cf('Profile Picture', 'Image', 'image'),
 			name: cf('Name'),
+      headline: cf('Headline'),
 			email: cf('Email'),
 			phone: cf('Phone'),
+      location: cf('Location'),
 			summary: cf('Summary',"Summary","textarea"),
 		},
 		visible: Boolean(true),
@@ -190,7 +194,7 @@ export const get_blank_resume = () => {
 		},
 		sections: [
       {...get_min_data('Basic',"One"),items: [get_blank_basic()]},
-      {...get_min_data('Location','One'),items: [get_blank_location()]},
+      // {...get_min_data('Location','One'),items: [get_blank_location()]},
 			{ ...get_min_data('Social Profile'), items: [get_blank_social_profile()] },
 			{
 				...get_min_data('Experience'),
@@ -227,37 +231,9 @@ export const get_icon_from_section_type = (type: sectionType) => {
     
 	}[type.toLowerCase()] || faFaceGrinSquint;
 };
-export const get_all_resume_arr = (): Resume[] => {
-	let resume_data = [];
-	if (browser) {
-		const data = localStorage.getItem('all_resume');
-		if (!data) {
-			localStorage.setItem('all_resume', JSON.stringify([]));
-		} else {
-			resume_data = JSON.parse(data);
-		}
-	}
-	return resume_data;
-};
 
-export const get_all_profiles = (): Record<string,Profile> => {
-	let image_data = {};
-	if (browser) {
-		const data = localStorage.getItem('all_profiles');
-		if (!data) {
-			localStorage.setItem('all_profiles', JSON.stringify({}));
-		} else {
-			image_data = JSON.parse(data);
-		}
-	}
-	return image_data;
-};
-export const get_ls_resume = (id: number): Resume | undefined => {
-	const resume_data = get_all_resume_arr();
-	console.log({ all_reusme: resume_data, id });
-	const resume = resume_data.find((item) => item.id === id);
-	return resume;
-};
+
+
 
 
 
@@ -269,7 +245,7 @@ export const get_blank_section_item = (type: sectionType) => {
 		projects: get_blank_project(),
 		'social profile': get_blank_social_profile(),
 		basics: get_blank_basic(),
-    location: get_blank_location(),
+    // location: get_blank_location(),
 		certificates: get_blank_certificate(),
 		custom_info: {},
 		custom_pills: {},
@@ -280,25 +256,14 @@ export const get_blank_section_item = (type: sectionType) => {
 	return { ...sectionItem };
 };
 
-export const get_resume = () => {
-	const rid = get(resume_id);
-	return get(store).find((resume) => resume.id === rid) as Resume;
-};
 
-export const get_profile = () => {
-  const rid = get(resume_id)
-  return get(profile_store)[rid]
+export const social_icon = {
+  'facebook': faF,
+  'linkedin': faLink,
+  'email': faLink,
+  'phone': faPhone  
 }
-export const no_of_sections = (): number => {
-	return get_resume().sections.length;
-};
 
-export const no_of_resumes = (): number => {
-	return get(store).length;
-};
-export const get_resume_index = () => {
-	return get(store).findIndex((resume) => resume.id === get(resume_id));
-};
 // export const get_resume_data_for_preview() => {
 //   const resume = get_resume();
 //   const result = {}
