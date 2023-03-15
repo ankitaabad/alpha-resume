@@ -1,5 +1,6 @@
 <script>
-	import { get_icon_from_section_type, get_resume_index, no_of_sections } from '$lib/utils';
+	import {  get_resume_index, no_of_sections } from '$lib/store';
+  import {get_icon_from_section_type,} from "$lib/utils"
 	import { fade, blur, fly, slide, scale,draw } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -63,7 +64,7 @@
 				out:fly={{ y: -20, duration: 400 }}
 				in:fly={{ delay: 410, duration: 400, y: 50, easing: quintOut }}
 			>
-				<Section bind:section={focused}/>
+				<Section section_index = {index}/>
 			</div>
 		{/key}
 	</div>

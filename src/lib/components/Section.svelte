@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { imageCropWindowDisplay, store } from '$lib/store';
-	import { get_resume, get_resume_index, type Section } from '$lib/utils';
-	export let section: Section<any>;
-	let section_index = get_resume().sections.findIndex((item) => item.id === section.id);
-
-	import { quill } from 'svelte-quill';
+	import {  get_resume_index, store } from '$lib/store';
+	import { get_resume,  } from '$lib/store';
+  import type { Section } from '$lib/utils';
+	export let section_index:number;
+  console.log({section_index})
+	// import { quill } from 'svelte-quill';
 	import ProfilePicture from './ProfilePicture.svelte';
 	let toolbarOptions = [
 		['link'],
@@ -25,8 +25,12 @@
 	let avatar, fileinput;
 	let src = './default-pp.svg';
 
-	let resume_index = get_resume_index();
+  let resume = get_resume()
+  console.log({resume})
+  let section = resume.sections[section_index]
 	let section_name = section.name;
+  console.log({section_name})
+  let resume_index = get_resume_index()
 </script>
 
 <div>
@@ -35,8 +39,8 @@
 			{section_name}
 		</h2>
 		<div class="flex flex-col p-5">
-			{#each section.items as { fields, id }}
-				{#each Object.values(fields) as field}
+			{#each $store[resume_index].sections[section_index].items as { fields, id }}
+				{#each Object.entries(fields) as [key,field]}
 					{#if field.type === 'image'}
 						<label for="" class="text-sm text-gray-700">{field.label}</label>
 
@@ -49,17 +53,32 @@
 								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
 								placeholder={field.placeholder}
 								bind:value={field.value}
+                on:keyup = {() =>fields = fields}
+
 							/>
 						</div>
 					{:else if field.type === 'textarea'}
 						<div class="form-group flex flex-col gap-1 mb-4">
+							<label for="" class="text-sm text-gray-700">Summary</label>
+							<textarea
+								id=""
+								cols="15"
+								rows="4"
+								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
+								placeholder={field.label}
+								bind:value={field.value}
+                on:keyup = {() =>fields = fields}
+
+							/>
+						</div>
+						<!-- <div class="form-group flex flex-col gap-1 mb-4">
 							<label for="" class="text-sm text-gray-700">{field.label}</label>
 							<div
 								class="editor "
 								use:quill={options}
 								on:text-change={(e) => (field.value = e.detail.html)}
 							/>
-						</div>
+						</div> -->
 					{/if}
 				{/each}
 				{#if section.items.length > 1}
