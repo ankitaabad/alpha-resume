@@ -1,6 +1,6 @@
 <script>
 	import { get_resume_index, no_of_sections } from '$lib/store';
-	import { get_icon_from_section_type } from '$lib/utils';
+	import { get_icon_from_section_type, get_social_icon } from '$lib/utils';
 	import { fade, blur, fly, slide, scale, draw } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -45,10 +45,14 @@
 						class="rounded cursor-pointer w-full flex items-center gap-3 py-3 px-4  focus:text-blue-700 focus:bg-blue-50 focus:rounded  hover:text-blue-700 hover:bg-blue-50 hover:rounded text-gray-700 font-normal"
 						on:click={() => (index = i)}
 					>
-						<Fa
+						<!-- <Fa
 							icon={get_icon_from_section_type(section.type)}
 							class="focus:text-blue-700 text-sm text-gray-700 self-center "
-						/>
+						/> -->
+            <div class="text-xl">
+
+              <svelte:component this = {get_social_icon(section.type.toLowerCase())}/>
+            </div>
 
 						<div class=" ">{section.name}</div></a
 					>

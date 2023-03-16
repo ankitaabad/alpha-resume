@@ -13,7 +13,7 @@
 	$: console.log({ avatar });
 </script>
 
-<div>
+<div class="mx-5">
 	<!-- <h1 class="text-2xl font-semibold ">{$preview_data?.['Social Profile']?.data[0]?.Network}</h1> -->
 
 	<div
@@ -51,6 +51,10 @@
             <svelte:component class="inline text-gray-500" this ={get_social_icon('location')}/>	
 						<span class="text-gray-500">{$preview_data?.Basic?.data[0].Location}</span>
 					</p>
+          <p class="w-full" class:hidden={$preview_data?.['Social Profile']?.data[0].Username == ''}>
+            <svelte:component class="inline text-gray-500" this ={get_social_icon('linkedin')}/>	
+						<a href = {$preview_data?.['Social Profile']?.data[0].URL} class="text-gray-500">{$preview_data?.['Social Profile']?.data[0].Username}</a>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -69,7 +73,7 @@
 			>
 				About Me
 			</h2>
-			<p class="text-gray-500">
+			<p class="text-gray-500 text-justify">
 				{$preview_data?.Basic?.data[0].Summary}
 			</p>
 		</div>
