@@ -11,15 +11,17 @@
 		faFileExport,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import Import from 'svelte-material-icons/Import.svelte';
+	import Export from 'svelte-material-icons/Export.svelte';
 	let src = './logo.svg';
 	const navButtons = [
 		{
 			text: 'Export',
-			icon: 'faFileImport',
+			icon: Export,
 		},
 		{
 			text: 'Import',
-			icon: 'faFileExport',
+			icon: Import,
 		},
 	];
 </script>
@@ -45,8 +47,10 @@
 		{#each navButtons as { text, icon }}
 			<button
 				class="bg-gray-100 py-1 px-4 rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-gray-50"
-				><Fa {icon} /> {text}</button
 			>
+				<svelte:component this={icon} />
+				{text}
+			</button>
 		{/each}
 		<button
 			class="bg-gray-100 py-1 px-4 rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-gray-50"
@@ -54,7 +58,8 @@
 		</button>
 		<button
 			class="bg-blue-700 py-1 px-4 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600"
-			 on:click={() => download()}><Fa icon={faDownload} /> Download
+			on:click={() => download()}
+			><Fa icon={faDownload} /> Download
 		</button>
 	</div>
 </div>

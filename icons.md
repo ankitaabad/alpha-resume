@@ -4,3 +4,5 @@
 - then import it with Pascal naming scheme like below
 - import FacebookMessenger from 'svelte-material-icons/FacebookMessenger.svelte'
 - and use it.
+
+<FacebookMessenger/>

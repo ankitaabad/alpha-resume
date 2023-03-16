@@ -5,15 +5,14 @@
 	$: profile = $profile_store[get(resume_id)];
 	$: console.log({ Profile_type: profile?.image });
 	let src = './favicon.png';
-
 	let preview_data = {};
 	export let settings;
 </script>
 
-<div class="w-7/12 " style= {`font-family: ${getFont()}`}>
+<div class="w-7/12 " style={`font-family: ${getFont()}`}>
 	<!--Action header-->
 	<div
-		class="h-14
+		class="h-16
 	 bg-white  px-5 flex text-base text-gray-700 items-center font-medium border-b border-solid border-gray-300"
 	>
 		<div class="relative flex gap-2 w-6/12">
@@ -116,11 +115,11 @@
 		</div>
 	</div>
 	<!--Template HTML-->
-	<div class="overflow-scroll max-h-[83vh] bg-gray-50 py-4 ">
+	<div class="overflow-auto max-h-[83vh] bg-gray-50 py-4 ">
 		<div
-			class="bg-white flex flex-col max-w-3xl mx-auto px-4 py-6 shadow border border-solid border-gray-100"
+			class="bg-white flex flex-col max-w-3xl mx-auto  shadow border border-solid border-gray-100"
 		>
-			<div id="preview" class="page p-6 my-4">
+			<div id="preview" class="page px-6 py-8">
 				<Basic />
 				<!-- header -->
 				<!-- <div class="flex border-b border-solid border-gray-300 pb-6 gap-6">
@@ -167,8 +166,8 @@
 					</div>
 				</div> -->
 				<!-- container -->
-				<!-- <div class="flex flex-col p-5  ">
-					<!-- profile -->
+				<!-- <div class="flex flex-col p-5  "> -->
+				<!-- profile -->
 				<div class="hidden">
 					<div class="profile border-b border-solid border-gray-300 py-6">
 						<h2 class="text-xl font-bold mb-3">Profile</h2>
@@ -337,7 +336,7 @@
 
 <style>
 	.page {
-		width: 210mm;
+		/* width: 210mm; */
 		height: 297mm;
 	}
 </style>

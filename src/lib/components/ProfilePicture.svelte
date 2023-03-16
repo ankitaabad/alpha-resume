@@ -2,21 +2,21 @@
 	import { imageCropWindowDisplay } from '$lib/store';
 	import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	let src = './default-pp.svg';
 	let avatar, fileinput;
-  let image
+	let image;
 	import MyWindowComponent from './MyWindowComponent.svelte';
 	const onFileSelected = (e) => {
-    console.log("File selected")
+		console.log('File selected');
 		let image1 = e.target.files[0];
 
 		let reader = new FileReader();
 		reader.onload = (e) => {
 			image = e.target.result;
-      $imageCropWindowDisplay = true;
-      console.log({"image crop window":$imageCropWindowDisplay})
+			$imageCropWindowDisplay = true;
+			console.log({ 'image crop window': $imageCropWindowDisplay });
 		};
 		reader.readAsDataURL(image1);
-
 	};
 </script>
 
@@ -27,20 +27,20 @@
 		</div>
 	</div>
 {/if}
-<div class="form-group flex flex-col gap-1 mb-4 w-5/12">
+<div class="flex w-5/12">
 	<div
-		class=" flex items-center justify-center p-5 rounded-lg border border-solid border-gray-400  h-full w-full cursor-pointer text-4xl  active:text-3xl shadow-lg"
+		class=" flex items-center justify-center p-5 rounded-lg border border-solid border-gray-400  h-full w-full cursor-pointer text-4xl  active:shadow-lg"
 		on:click={() => {
 			fileinput.click();
 		}}
-	>	
-    <Fa icon={  faArrowUpFromBracket    } class=""/>
+	>
+		<img class="upload w-16" {src} alt="Profile Picture" />
 	</div>
 	<input
 		style="display:none"
 		type="file"
 		accept=".jpg, .jpeg, .png"
-    on:click = {(e)=> e.target.value = null}
+		on:click={(e) => (e.target.value = null)}
 		on:change={(e) => onFileSelected(e)}
 		bind:this={fileinput}
 	/>

@@ -1,7 +1,6 @@
 // import { browser } from '$app/environment';
 
 import {
-  faBahai,
 	faBook,
 	faExpand,
 	faF,
@@ -13,6 +12,7 @@ import {
 	faPhone,
 	faWalkieTalkie,
 	faWorm,
+	faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
 /**
@@ -36,7 +36,7 @@ export type sectionType =
 	| 'projects'
 	| 'interests'
 	| 'certificates'
-  | 'location'
+	| 'location'
 	| 'basics'
 	| 'custom_pills'
 	| 'custom_info'
@@ -151,11 +151,11 @@ const get_blank_basic = () => {
 		fields: {
 			photo: cf('Profile Picture', 'Image', 'image'),
 			name: cf('Name'),
-      headline: cf('Headline'),
+			designation: cf('Designation'),
 			email: cf('Email'),
 			phone: cf('Phone'),
-      location: cf('Location'),
-			summary: cf('Summary',"Summary","textarea"),
+			location: cf('Location'),
+			summary: cf('Summary', 'Summary', 'textarea'),
 		},
 		visible: Boolean(true),
 	};
@@ -176,13 +176,13 @@ export const get_blank_location = () => {
 };
 export type LocationItem = ReturnType<typeof get_blank_location>;
 
-const get_min_data = (name: string,max="Many") => {
+const get_min_data = (name: string, max = 'Many') => {
 	return {
 		name,
 		type: name,
 		id: name,
 		visible: true,
-    max
+		max,
 	};
 };
 export const get_blank_resume = () => {
@@ -190,11 +190,11 @@ export const get_blank_resume = () => {
 		id: get_unique_id(),
 		name: 'untitled',
 		settings: {
-			font: 'Dosis',
+			font: 'inter',
 		},
 		sections: [
-      {...get_min_data('Basic',"One"),items: [get_blank_basic()]},
-      // {...get_min_data('Location','One'),items: [get_blank_location()]},
+			{ ...get_min_data('Basic', 'One'), items: [get_blank_basic()] },
+			// {...get_min_data('Location','One'),items: [get_blank_location()]},
 			{ ...get_min_data('Social Profile'), items: [get_blank_social_profile()] },
 			{
 				...get_min_data('Experience'),
@@ -212,30 +212,25 @@ export const get_blank_resume = () => {
 				...get_min_data('Certificates'),
 				items: [get_blank_certificate()],
 			},
-      {...get_min_data("Skills"), items: [get_blank_skill()]}
+			{ ...get_min_data('Skills'), items: [get_blank_skill()] },
 		],
 	};
 };
 export type Resume = ReturnType<typeof get_blank_resume>;
 
 export const get_icon_from_section_type = (type: sectionType) => {
-	return {
-		experience: faExpand,
-		education: faBook,
-		projects: faWorm,
-		certificate: faWalkieTalkie,
-		'social profile': faFaceAngry,
-
-    'location' : faLocation,
-    'basic': faBahai,
-    
-	}[type.toLowerCase()] || faFaceGrinSquint;
+	return (
+		{
+			basic: faUser,
+			experience: faExpand,
+			education: faBook,
+			projects: faWorm,
+			certificate: faWalkieTalkie,
+			'social profile': faFaceAngry,
+			location: faLocation,
+		}[type.toLowerCase()] || faFaceGrinSquint
+	);
 };
-
-
-
-
-
 
 export const get_blank_section_item = (type: sectionType) => {
 	const item: Record<sectionType, Record<string, any>> = {
@@ -245,7 +240,7 @@ export const get_blank_section_item = (type: sectionType) => {
 		projects: get_blank_project(),
 		'social profile': get_blank_social_profile(),
 		basics: get_blank_basic(),
-    // location: get_blank_location(),
+		// location: get_blank_location(),
 		certificates: get_blank_certificate(),
 		custom_info: {},
 		custom_pills: {},
@@ -256,13 +251,12 @@ export const get_blank_section_item = (type: sectionType) => {
 	return { ...sectionItem };
 };
 
-
 export const social_icon = {
-  'facebook': faF,
-  'linkedin': faLink,
-  'email': faLink,
-  'phone': faPhone  
-}
+	facebook: faF,
+	linkedin: faLink,
+	email: faLink,
+	phone: faPhone,
+};
 
 // export const get_resume_data_for_preview() => {
 //   const resume = get_resume();
