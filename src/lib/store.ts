@@ -135,7 +135,7 @@ function create_all_resume() {
 }
 
 export const getFont = () => {
-	return get_resume()?.settings?.font || "Dosis";
+	return get_resume()?.settings?.font || "Inter";
 };
 export const store = create_all_resume();
 export const profile_store = create_profile_store();
@@ -195,7 +195,7 @@ export const get_resume_index = () => {
 export function download() {
 	console.log('inside download button');
 	const element = document.getElementById('preview');
-	element.style.fontFamily = getFont() || 'Dosis';
+	element.style.fontFamily = getFont() || 'Inter';
 	html2pdf(element, { html2canvas: { scale: 2 } });
 }
 

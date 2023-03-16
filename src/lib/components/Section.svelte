@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import {  get_resume_index, store } from '$lib/store';
-	import { get_resume,  } from '$lib/store';
-  import type { Section } from '$lib/utils';
-	export let section_index:number;
-  $: console.log({section_index})
+	import { get_resume_index, store } from '$lib/store';
+	import { get_resume } from '$lib/store';
+	import type { Section } from '$lib/utils';
+	export let section_index: number;
+	$: console.log({ section_index });
 	// import { quill } from 'svelte-quill';
 	import ProfilePicture from './ProfilePicture.svelte';
 	let toolbarOptions = [
@@ -25,12 +25,12 @@
 	let avatar, fileinput;
 	let src = './default-pp.svg';
 
-  let resume = get_resume()
-  console.log({resume})
-  $: section = resume.sections[section_index]
+	let resume = get_resume();
+	console.log({ resume });
+	$: section = resume.sections[section_index];
 	$: section_name = section.name;
-  console.log({section_name})
-  let resume_index = get_resume_index()
+	console.log({ section_name });
+	let resume_index = get_resume_index();
 </script>
 
 <div>
@@ -40,11 +40,13 @@
 		</h2>
 		<div class="flex flex-col p-5">
 			{#each $store[resume_index].sections[section_index].items as { fields, id }}
-				{#each Object.entries(fields) as [key,field]}
+				{#each Object.entries(fields) as [key, field]}
 					{#if field.type === 'image'}
-						<label for="" class="text-sm text-gray-700">{field.label}</label>
+						<div class="form-group flex flex-col gap-1 mb-4">
+							<label for="" class="text-sm text-gray-700">{field.label}</label>
 
-						<ProfilePicture />
+							<ProfilePicture />
+						</div>
 					{:else if field.type === 'text'}
 						<div class="form-group flex flex-col gap-1 mb-4">
 							<label for="" class="text-sm text-gray-700">{field.label}</label>
@@ -53,8 +55,7 @@
 								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
 								placeholder={field.placeholder}
 								bind:value={field.value}
-                on:keyup = {() =>fields = fields}
-
+								on:keyup={() => (fields = fields)}
 							/>
 						</div>
 					{:else if field.type === 'textarea'}
@@ -67,8 +68,7 @@
 								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
 								placeholder={field.label}
 								bind:value={field.value}
-                on:keyup = {() =>fields = fields}
-
+								on:keyup={() => (fields = fields)}
 							/>
 						</div>
 						<!-- <div class="form-group flex flex-col gap-1 mb-4">
