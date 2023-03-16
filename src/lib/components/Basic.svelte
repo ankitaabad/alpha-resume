@@ -1,5 +1,6 @@
 <script>
 	import { get_resume_index, preview_data, profile_store, resume_id } from '$lib/store';
+	import { get_social_icon } from '$lib/utils';
 	import { get } from 'svelte/store';
 	let avatar;
 	profile_store.subscribe((value) => {
@@ -37,17 +38,17 @@
 				<div class="flex flex-col ">
 					<p class="w-full" class:hidden={$preview_data?.Basic?.data[0].Email == ''}>
 						<a href={$preview_data?.Basic?.data[0].Email} class="text-gray-500"
-							><span class="text-gray-900">Email:</span>
+							><svelte:component class="inline" this ={get_social_icon('email')}/>
 							{$preview_data?.Basic?.data[0].Email}</a
 						>
 					</p>
 					<p class="w-full" class:hidden={$preview_data?.Basic?.data[0].Phone == ''}>
 						<a href="/" class="text-gray-500"
-							><span class="text-gray-900">Phone:</span> {$preview_data?.Basic?.data[0].Phone}</a
+							><svelte:component class="inline" this ={get_social_icon('phone')}/>{$preview_data?.Basic?.data[0].Phone}</a
 						>
 					</p>
 					<p class="w-full" class:hidden={$preview_data?.Basic?.data[0].Location == ''}>
-						<span class="text-gray-900">Location:</span>
+            <svelte:component class="inline text-gray-500" this ={get_social_icon('location')}/>	
 						<span class="text-gray-500">{$preview_data?.Basic?.data[0].Location}</span>
 					</p>
 				</div>

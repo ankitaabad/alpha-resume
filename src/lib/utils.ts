@@ -15,6 +15,12 @@ import {
 	faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
+
+import Email from 'svelte-material-icons/Email.svelte'
+import Phone from 'svelte-material-icons/Phone.svelte'
+import MapMarker  from 'svelte-material-icons/MapMarker.svelte'
+import Facebook from 'svelte-material-icons/Facebook.svelte'
+import Linkedin from 'svelte-material-icons/Linkedin.svelte'
 /**
  * create field
  */
@@ -251,12 +257,16 @@ export const get_blank_section_item = (type: sectionType) => {
 	return { ...sectionItem };
 };
 
-export const social_icon = {
-	facebook: faF,
-	linkedin: faLink,
-	email: faLink,
-	phone: faPhone,
-};
+const social_icon = {
+	facebook: Facebook,
+	linkedin: Linkedin,
+	email: Email,
+	phone: Phone,
+  location: MapMarker
+}
+export const get_social_icon = (name: keyof typeof social_icon) => {
+  return social_icon[name]
+}
 
 // export const get_resume_data_for_preview() => {
 //   const resume = get_resume();
