@@ -111,14 +111,16 @@ function create_all_resume() {
 			ar.push(blank_resume);
 			return ar;
 		});
-		resume_id.set(blank_resume.id);
-		goto('/resume');
+		// resume_id.set(blank_resume.id);
+  const path = `/resume?id=${blank_resume.id}`
+		goto(path);
 	};
 
 	const edit_resume = (id) => {
 		console.log('editing resume');
-		resume_id.set(id);
-		goto('/resume');
+    const path = `/resume?id=${id}`
+		goto(path);
+	
 	};
 
 	return {
