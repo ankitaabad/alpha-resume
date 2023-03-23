@@ -13,6 +13,8 @@
 	import Fa from 'svelte-fa';
 	import Import from 'svelte-material-icons/Import.svelte';
 	import Export from 'svelte-material-icons/Export.svelte';
+	import Eye from 'svelte-material-icons/Eye.svelte';
+	import Download from 'svelte-material-icons/Download.svelte';
 	let src = './logo.svg';
 	const navButtons = [
 		{
@@ -48,18 +50,18 @@
 			<button
 				class="bg-gray-100 py-1 px-4 rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-gray-50"
 			>
-				<svelte:component this={icon} />
+				<svelte:component this={icon} class="text-xl" />
 				{text}
 			</button>
 		{/each}
 		<button
 			class="bg-gray-100 py-1 px-4 rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-gray-50"
-			><Fa icon={faEye} />Preview
+			><Eye class="text-lg" />Preview
 		</button>
 		<button
 			class="bg-blue-700 py-1 px-4 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600"
 			on:click={() => download()}
-			><Fa icon={faDownload} /> Download
+			><Download class="text-lg" /> Download
 		</button>
 	</div>
 </div>
