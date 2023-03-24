@@ -173,7 +173,6 @@ function create_all_resume() {
 		add_resume,
 		delete_resume,
 		edit_resume,
-		arrow_hide,
     update_font,
 	get_item_index,
 	};
