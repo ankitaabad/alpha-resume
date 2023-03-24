@@ -19,6 +19,7 @@ import Email from 'svelte-material-icons/Email.svelte';
 import Phone from 'svelte-material-icons/Phone.svelte';
 import MapMarker from 'svelte-material-icons/MapMarker.svelte';
 import Facebook from 'svelte-material-icons/Facebook.svelte';
+import Google from 'svelte-material-icons/Google.svelte';
 import Linkedin from 'svelte-material-icons/Linkedin.svelte';
 import Account from 'svelte-material-icons/Account.svelte';
 import CertificateOutline from 'svelte-material-icons/CertificateOutline.svelte';
@@ -80,8 +81,8 @@ const get_blank_education = () => {
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			grade: cf('End Date'),
-			summary: cf('Summary', 'Summary', 'textarea'),
 			url: cf('URL'),
+			summary: cf('Summary', 'Summary', 'textarea'),
 		},
 		visible: Boolean(true),
 	};
@@ -95,8 +96,8 @@ const get_blank_experience = () => {
 			position: cf('Position'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
-			summary: cf('Summary', 'Summary', 'textarea'),
 			url: cf('URL'),
+			summary: cf('Summary', 'Summary', 'textarea'),
 		},
 		visible: Boolean(true),
 	};
@@ -149,7 +150,7 @@ const get_blank_social_profile = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
-			network: cf('Network'),
+			network: cf('Network','Network','dropdown'),
 			username: cf('Username'),
 			url: cf('URL'),
 		},
@@ -266,6 +267,7 @@ export const get_blank_section_item = (type: sectionType) => {
 
 const social_icon = {
 	facebook: Facebook,
+	google: Google,
 	linkedin: Linkedin,
 	email: Email,
 	phone: Phone,

@@ -3,6 +3,7 @@
 	import { get_social_icon } from '$lib/utils';
 	import { get } from 'svelte/store';
 	let avatar;
+	let network;
 	profile_store.subscribe((value) => {
 		avatar = value[get(resume_id)];
 		console.log('inside subscribe');
@@ -54,7 +55,7 @@
 						class="w-full"
 						class:hidden={$preview_data?.['Social Profile']?.data[0].Username == ''}
 					>
-						<svelte:component this={get_social_icon('linkedin')} class="inline text-gray-500" />
+						<svelte:component this={get_social_icon($preview_data?.['Social Profile']?.data[0].Network)} class="inline text-gray-500" />
 						<a href={$preview_data?.['Social Profile']?.data[0].URL} class="text-gray-500"
 							>{$preview_data?.['Social Profile']?.data[0].Username}</a
 						>

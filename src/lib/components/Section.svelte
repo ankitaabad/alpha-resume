@@ -25,10 +25,9 @@
 		placeholder: 'Professional Summary',
 	};
 	let content = { html: '', text: '' };
-
 	let avatar, fileinput;
 	let src = './default-pp.svg';
-	
+
 	let resume = get_resume();
 	console.log({ resume });
 	$: section = resume.sections[section_index];
@@ -39,18 +38,19 @@
 
 <div>
 	<div class="m-5" id="Education">
-		<h2 class="py-3 text-lg font-semibold ">
+		<!-- <h2 class="py-3 text-lg font-semibold ">
 			{section_name}
-		</h2>
+		</h2> -->
 		<!-- p-5 bg-white  rounded-lg border-solid border border-gray-300 -->
 		<div class="flex flex-col gap-4">
 			{#each $store[resume_index].sections[section_index].items as { fields, id }}
 				<div class="bg-white rounded-lg border-solid border border-gray-300">
-					{#if section.items.length > 1}
-						<div
-							class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
-						>
-							<div>{section.id} {store.get_item_index(section.id,id)+1}</div>
+          <div
+          class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
+          >
+          <div>{section.id}</div>
+					{#if section.type!=="Basic"}
+					<div class="flex">{store.get_item_index(section.id,id)+1}</div>
 							<div class="flex items-center">
 								<button
 									class:hidden={store.get_item_index(section.id,id)==0}
@@ -78,8 +78,8 @@
 									<Delete class="text-gray-700  text-xl" /></button
 								>
 							</div>
+              {/if}
 						</div>
-					{/if}
 					<div class="pt-5 px-5 pb-1  ">
 						{#each Object.entries(fields) as [key, field]}
 							{#if field.type === 'image'}
@@ -111,6 +111,22 @@
 										bind:value={field.value}
 										on:keyup={() => (fields = fields)}
 									/>
+								</div>
+								{:else if field.type === 'dropdown'}
+								<div class="form-group flex flex-col gap-1 mb-4">
+									<label for="" class="text-sm text-gray-700">Network</label>
+									<select 
+										id=""
+										class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
+										placeholder={field.label}
+										bind:value={field.value}
+										on:keyup={() => (fields = fields)}
+									>
+									<option value="" selected disabled>Choose Network</option>
+									<option value="linkedin">LinkedIn</option>
+  									<option value="google">Google</option>
+  									<option value="facebook">Facebook</option>
+									</select>
 								</div>
 								<!-- <div class="form-group flex flex-col gap-1 mb-4">
 							<label for="" class="text-sm text-gray-700">{field.label}</label>

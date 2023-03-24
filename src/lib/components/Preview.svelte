@@ -3,6 +3,7 @@
 	import { font, profile_store, resume_id, store } from '$lib/store';
 	import { get } from 'svelte/store';
 	import Basic from './Basic.svelte';
+	import Experience from './Experience.svelte';
 	$: profile = $profile_store[get(resume_id)];
 	$: console.log({ Profile_type: profile?.image });
 	let src = './favicon.png';
@@ -139,6 +140,7 @@
 				<!-- container -->
 				<!-- <div class="flex flex-col p-5  "> -->
 				<!-- profile -->
+        <Experience/>
 				<div class="hidden">
 					<div class="profile border-b border-solid border-gray-300 py-6">
 						<h2 class="text-xl font-bold mb-3">Profile</h2>
