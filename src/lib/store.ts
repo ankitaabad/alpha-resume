@@ -133,6 +133,17 @@ function create_all_resume() {
 			return ar;
 		});
 	};
+	const arrow_hide = (section_id, item_id,section_length,type) => {
+			const resume = get_resume();
+			const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
+			const item_index = section.items.findIndex((item) => item.id === item_id);
+			if(type=='up' && item_index==0){
+				return true;
+			}else if(type=='down' && item_index==section_length-1){
+				return true;
+			}
+			return false;
+	};
 	const delete_resume = (resume_id) => {
 		update((ar) => {
 			const updated_resume_list = ar.filter((resume) => resume.id !== resume_id);
@@ -168,6 +179,7 @@ function create_all_resume() {
 		add_resume,
 		delete_resume,
 		edit_resume,
+		arrow_hide,
     update_font,
 	};
 }
