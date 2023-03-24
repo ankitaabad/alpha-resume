@@ -1,15 +1,24 @@
 <script>
-	import { getFont, profile_store, resume_id, store } from '$lib/store';
+	import { clickOutside } from '$lib/outclick';
+	import { font, profile_store, resume_id, store } from '$lib/store';
 	import { get } from 'svelte/store';
 	import Basic from './Basic.svelte';
 	$: profile = $profile_store[get(resume_id)];
 	$: console.log({ Profile_type: profile?.image });
 	let src = './favicon.png';
 	let preview_data = {};
-	export let settings;
+	// export let settings;
+	let hideFontSelectBox = true;
+	let fonts = ['Dosis', 'Inter', 'Roboto', 'Patrick Hand'];
+	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
+	$: console.log({ currentFont });
+	const selectFont = (font) => {
+		currentFont = font;
+		hideFontSelectBox = true;
+	};
 </script>
 
-<div class="w-7/12 " style={`font-family: ${getFont()}`}>
+<div class="w-7/12 ">
 	<!--Action header-->
 	<div
 		class="h-14
@@ -23,8 +32,11 @@
 					id="menu-button"
 					aria-expanded="true"
 					aria-haspopup="true"
+					use:clickOutside
+					on:outclick={() => (hideFontSelectBox = true)}
+					on:click={() => (hideFontSelectBox ^= true)}
 				>
-					Font
+					Font ( {currentFont} )
 					<svg
 						class="-mr-1 h-5 w-5 text-gray-400"
 						viewBox="0 0 20 20"
@@ -51,39 +63,29 @@
 		-->
 			<div
 				class="absolute left-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+				class:hidden={hideFontSelectBox}
 				role="menu"
 				aria-orientation="vertical"
 				aria-labelledby="menu-button"
 				tabindex="-1"
 			>
 				<div class="py-1" role="none">
-					<a
-						href="/"
-						class="text-gray-700 block px-4 py-2 text-sm"
-						role="menuitem"
-						tabindex="-1"
-						id="menu-item-0">Account settings</a
-					>
-					<a
-						href="/"
-						class="text-gray-700 block px-4 py-2 text-sm"
-						role="menuitem"
-						tabindex="-1"
-						id="menu-item-1">Support</a
-					>
-					<a
-						href="/"
-						class="text-gray-700 block px-4 py-2 text-sm"
-						role="menuitem"
-						tabindex="-1"
-						id="menu-item-2">License</a
-					>
+					{#each fonts as font}
+						<button
+							on:click={() => selectFont(font)}
+							class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
+							class:bg-blue-100={font === currentFont}
+							role="menuitem"
+							tabindex="-1"
+							id="menu-item-0">{font}</button
+						>
+					{/each}
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--Template HTML-->
-	<div class="overflow-auto max-h-[83vh] bg-gray-50 py-4 ">
+	<div class="overflow-auto max-h-[83vh] bg-gray-50 py-4 " style={`font-family: ${currentFont}`}>
 		<div
 			class="bg-white flex flex-col max-w-3xl mx-auto  shadow border border-solid border-gray-100"
 		>

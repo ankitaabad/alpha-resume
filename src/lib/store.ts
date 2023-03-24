@@ -10,7 +10,7 @@ export type Profile = {
 };
 
 export const get_all_profiles = (): Record<string, Profile> => {
-  console.log("get all profile called")
+	console.log('get all profile called');
 	let image_data = {};
 	if (browser) {
 		const data = localStorage.getItem('all_profiles');
@@ -20,7 +20,7 @@ export const get_all_profiles = (): Record<string, Profile> => {
 			image_data = JSON.parse(data);
 		}
 	}
-  console.log({image_data})
+	console.log({ image_data });
 	return image_data;
 };
 export const get_ls_resume = (id: number): Resume | undefined => {
@@ -45,9 +45,9 @@ function create_profile_store() {
 	const profiles = get_all_profiles();
 	const { subscribe, update } = writable(profiles);
 	const addImage = (profile: Profile) => {
-    console.log("add image called")
+		console.log('add image called');
 		update((store) => {
-      console.log("inside image update")
+			console.log('inside image update');
 			store[get(resume_id)] = profile;
 			return store;
 		});
@@ -61,7 +61,7 @@ function create_profile_store() {
 
 function create_all_resume() {
 	const resumes = get_all_resume_arr();
-	const { subscribe, update,set } = writable(resumes);
+	const { subscribe, update, set } = writable(resumes);
 
 	const add_section_item = (section_id) => {
 		update((ar) => {
@@ -138,21 +138,20 @@ function create_all_resume() {
 			return ar;
 		});
 		// resume_id.set(blank_resume.id);
-  const path = `/resume?id=${blank_resume.id}`
+		const path = `/resume?id=${blank_resume.id}`;
 		goto(path);
 	};
 
 	const edit_resume = (id) => {
 		console.log('editing resume');
-    const path = `/resume?id=${id}`
+		const path = `/resume?id=${id}`;
 		goto(path);
-	
 	};
 
 	return {
 		subscribe,
-    update,
-    set,
+		update,
+		set,
 		add_section_item,
 		remove_section_item,
 		update_section_item,
@@ -163,53 +162,56 @@ function create_all_resume() {
 	};
 }
 
-export const getFont = () => {
-	return get_resume()?.settings?.font || "Inter";
-};
 export const store = create_all_resume();
 export const profile_store = create_profile_store();
 export const imageCropWindowDisplay = writable(false);
 
-
 store.subscribe((data) => {
-  console.log("store being updated")
+	console.log('store being updated');
 	if (browser) {
 		localStorage.setItem('all_resume', JSON.stringify(data));
-    console.log("after localstorage update")
+		console.log('after localstorage update');
 	}
 });
 
 profile_store.subscribe((data) => {
-  console.log("profile store subscribe called ")
+	console.log('profile store subscribe called ');
 	if (browser) {
 		localStorage.setItem('all_profiles', JSON.stringify(data));
 	}
 });
 
-export const preview_data = derived([store,resume_id,profile_store],([$store,$resume_id,$profile_store]) => {
-  console.log('Preview_data derived store called');
+export const font = derived([store, resume_id], ([$store, $resume_id]) => {
+	const resume = $store.find((resume) => resume.id === $resume_id);
+	return resume?.settings.font;
+});
+export const preview_data = derived(
+	[store, resume_id, profile_store],
+	([$store, $resume_id, $profile_store]) => {
+		console.log('Preview_data derived store called');
 
-  if ($resume_id) {
-    console.log({ resume_id: $resume_id });
-    const resume = $store.find((resume) => resume.id === $resume_id);
-    console.log({ resume });
-    const profile = $profile_store[$resume_id];
-    let preview_data = {};
-    resume.sections.forEach((section) => {
-      preview_data[section.name] = { type: section.type };
+		if ($resume_id) {
+			console.log({ resume_id: $resume_id });
+			const resume = $store.find((resume) => resume.id === $resume_id);
+			console.log({ resume });
+			const profile = $profile_store[$resume_id];
+			let preview_data = {};
+			resume.sections.forEach((section) => {
+				preview_data[section.name] = { type: section.type };
 
-      preview_data[section.name]['data'] = section.items.map((item) => {
-        const field_data = {};
-        Object.keys(item.fields).forEach((key) => {
-          field_data[item.fields[key].label] = item.fields[key].value;
-        });
-        return field_data;
-      });
-    });
-    console.log({ preview_data });
-    return preview_data
-  }
-})
+				preview_data[section.name]['data'] = section.items.map((item) => {
+					const field_data = {};
+					Object.keys(item.fields).forEach((key) => {
+						field_data[item.fields[key].label] = item.fields[key].value;
+					});
+					return field_data;
+				});
+			});
+			console.log({ preview_data });
+			return preview_data;
+		}
+	},
+);
 
 export const no_of_sections = (): number => {
 	return get_resume().sections.length;
