@@ -143,6 +143,12 @@ function create_all_resume() {
 			}
 			return false;
 	};
+	const get_item_index = (section_id, item_id) => {
+		const resume = get_resume();
+		const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
+		const item_index = section.items.findIndex((item) => item.id === item_id);
+		return item_index;
+};
 	const delete_resume = (resume_id) => {
 		update((ar) => {
 			const updated_resume_list = ar.filter((resume) => resume.id !== resume_id);
@@ -180,6 +186,7 @@ function create_all_resume() {
 		edit_resume,
 		arrow_hide,
     update_font,
+	get_item_index,
 	};
 }
 

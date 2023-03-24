@@ -28,7 +28,7 @@
 
 	let avatar, fileinput;
 	let src = './default-pp.svg';
-
+	
 	let resume = get_resume();
 	console.log({ resume });
 	$: section = resume.sections[section_index];
@@ -50,17 +50,17 @@
 						<div
 							class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
 						>
-							<div>{section.id}</div>
+							<div>{section.id} {store.get_item_index(section.id,id)+1}</div>
 							<div class="flex items-center">
 								<button
-									class:hidden={store.arrow_hide(section.id,id,section.items.length,'up')}
+									class:hidden={store.get_item_index(section.id,id)==0}
 									on:click={() => store.move_section_item(section.id, id,'up')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
 								>
 									<ArrowUp class=" text-gray-700  text-2xl" /></button
 								>
 								<button
-									class:hidden={store.arrow_hide(section.id,id,section.items.length,'down')}
+									class:hidden={store.get_item_index(section.id,id)==section.items.length-1}
 									on:click={() => store.move_section_item(section.id, id,'down')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  font-bold"
 								>
