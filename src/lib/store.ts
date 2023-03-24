@@ -132,17 +132,6 @@ function create_all_resume() {
 			return ar;
 		});
 	};
-	const arrow_hide = (section_id, item_id,section_length,type) => {
-			const resume = get_resume();
-			const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
-			const item_index = section.items.findIndex((item) => item.id === item_id);
-			if(type=='up' && item_index==0){
-				return true;
-			}else if(type=='down' && item_index==section_length-1){
-				return true;
-			}
-			return false;
-	};
 	const get_item_index = (section_id, item_id) => {
 		const resume = get_resume();
 		const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
