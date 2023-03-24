@@ -62,15 +62,6 @@
 					>
 				</p>
 				{/each}
-					<!-- <p
-						class="w-full"
-						class:hidden={$preview_data?.['Social Profile']?.data[0].Username == ''}
-					>
-						<svelte:component this={get_social_icon($preview_data?.['Social Profile']?.data[0].Network)} class="inline text-gray-500" />
-						<a href={$preview_data?.['Social Profile']?.data[0].URL} class="text-gray-500"
-							>{$preview_data?.['Social Profile']?.data[0].Username}</a
-						>
-					</p> -->
 				</div>
 			</div>
 		</div>
