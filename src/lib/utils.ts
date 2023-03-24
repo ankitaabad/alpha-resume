@@ -15,19 +15,18 @@ import {
 	faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-
-import Email from 'svelte-material-icons/Email.svelte'
-import Phone from 'svelte-material-icons/Phone.svelte'
-import MapMarker  from 'svelte-material-icons/MapMarker.svelte'
-import Facebook from 'svelte-material-icons/Facebook.svelte'
-import Linkedin from 'svelte-material-icons/Linkedin.svelte'
-import Account from 'svelte-material-icons/Account.svelte'
-import CertificateOutline from 'svelte-material-icons/CertificateOutline.svelte'
-import School from 'svelte-material-icons/School.svelte'
-import Briefcase from 'svelte-material-icons/Briefcase.svelte'
-import Cellphone from 'svelte-material-icons/Cellphone.svelte'
-import Lighblub from 'svelte-material-icons/Lightbulb.svelte'
-import FolderStar  from 'svelte-material-icons/FolderStar.svelte'
+import Email from 'svelte-material-icons/Email.svelte';
+import Phone from 'svelte-material-icons/Phone.svelte';
+import MapMarker from 'svelte-material-icons/MapMarker.svelte';
+import Facebook from 'svelte-material-icons/Facebook.svelte';
+import Linkedin from 'svelte-material-icons/Linkedin.svelte';
+import Account from 'svelte-material-icons/Account.svelte';
+import CertificateOutline from 'svelte-material-icons/CertificateOutline.svelte';
+import School from 'svelte-material-icons/School.svelte';
+import Briefcase from 'svelte-material-icons/Briefcase.svelte';
+import Cellphone from 'svelte-material-icons/Cellphone.svelte';
+import Lighblub from 'svelte-material-icons/Lightbulb.svelte';
+import FolderStar from 'svelte-material-icons/FolderStar.svelte';
 
 /**
  * create field
@@ -199,10 +198,10 @@ const get_min_data = (name: string, max = 'Many') => {
 		max,
 	};
 };
-export const get_blank_resume = () => {
+export const get_blank_resume = (resume_name) => {
 	return {
 		id: get_unique_id(),
-		name: 'untitled',
+		name: resume_name || 'untitled',
 		settings: {
 			font: 'inter',
 		},
@@ -270,18 +269,18 @@ const social_icon = {
 	linkedin: Linkedin,
 	email: Email,
 	phone: Phone,
-  location: MapMarker,
-  basic: Account,
-  experience: Briefcase,
-  certificates: CertificateOutline,
-  education: School,
-  'social profile': Cellphone,
-  skills: Lighblub,
-  'projects': FolderStar
-}
+	location: MapMarker,
+	basic: Account,
+	experience: Briefcase,
+	certificates: CertificateOutline,
+	education: School,
+	'social profile': Cellphone,
+	skills: Lighblub,
+	projects: FolderStar,
+};
 export const get_social_icon = (name: keyof typeof social_icon) => {
-  return social_icon[name]
-}
+	return social_icon[name];
+};
 
 // export const get_resume_data_for_preview() => {
 //   const resume = get_resume();
