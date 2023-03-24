@@ -13,6 +13,7 @@
 	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
 	$: console.log({ currentFont });
 	const selectFont = (font) => {
+    store.update_font(font)
 		currentFont = font;
 		hideFontSelectBox = true;
 	};

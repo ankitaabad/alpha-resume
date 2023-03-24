@@ -98,6 +98,16 @@ function create_all_resume() {
 			return ar;
 		});
 	};
+
+  const update_font = (font:string) => {
+		update((ar) => {
+			const rid = get(resume_id);
+			const resume = get_resume();
+      resume.settings.font = font
+			ar[rid] = resume;
+			return ar;
+		});
+	};
 	const delete_resume = (resume_id) => {
 		update((ar) => {
 			const updated_resume_list = ar.filter((resume) => resume.id !== resume_id);
@@ -132,6 +142,7 @@ function create_all_resume() {
 		add_resume,
 		delete_resume,
 		edit_resume,
+    update_font,
 	};
 }
 
