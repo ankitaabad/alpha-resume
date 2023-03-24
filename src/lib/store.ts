@@ -247,7 +247,7 @@ export const get_resume_index = () => {
 export function download() {
 	console.log('inside download button');
 	const element = document.getElementById('preview');
-	element.style.fontFamily = getFont() || 'Inter';
+	element.style.fontFamily = get(font) || 'Inter';
 	html2pdf(element, { html2canvas: { scale: 2 } });
 }
 
