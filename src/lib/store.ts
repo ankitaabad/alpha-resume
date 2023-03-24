@@ -98,6 +98,32 @@ function create_all_resume() {
 			return ar;
 		});
 	};
+		// debounce it
+		const move_section_item = (section_id, item_id,type) => {
+			update((ar) => {
+			const rid = get(resume_id);
+			const resume = get_resume();
+			const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
+			const item_index = section.items.findIndex((item) => item.id === item_id);
+			var item=section.items[item_index]
+			if (type=='up'){
+				var item2=section.items[item_index-1]
+				if(item2!=undefined){
+				section.items[item_index-1] = item;
+				section.items[item_index] = item2;
+				}
+			}
+			else{
+				var item2=section.items[item_index+1]
+				if(item2!=undefined){
+				section.items[item_index+1] = item;
+				section.items[item_index] = item2;
+				}
+			}
+			ar[rid] = resume;
+			return ar;
+			});
+		};
 	const delete_resume = (resume_id) => {
 		update((ar) => {
 			const updated_resume_list = ar.filter((resume) => resume.id !== resume_id);
@@ -130,6 +156,7 @@ function create_all_resume() {
 		add_section_item,
 		remove_section_item,
 		update_section_item,
+		move_section_item,
 		add_resume,
 		delete_resume,
 		edit_resume,
