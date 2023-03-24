@@ -50,19 +50,21 @@
 						<div
 							class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
 						>
-							<div>Skill 1</div>
+							<div>{section.id}</div>
 							<div class="flex items-center">
 								<button
+									on:click={() => store.move_section_item(section.id, id,'up')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
 								>
 									<ArrowUp class=" text-gray-700  text-2xl" /></button
 								>
 								<button
+									on:click={() => store.move_section_item(section.id, id,'down')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  font-bold"
 								>
 									<ArrowDown class=" text-gray-700   text-2xl" /></button
 								>
-								<button
+								<button	
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200  transition "
 								>
 									<Eye class=" text-gray-700  text-xl" /></button
@@ -121,7 +123,7 @@
 					</div>
 				</div>
 			{/each}
-
+			
 			{#if section.max.toLowerCase() !== 'one'}
 				<button
 					class=" flex justify-center items-center gap-2 py-1 px-4 rounded-full text-blue-700 border border-solid border-blue-700 rb-button hover:text-white hover:bg-blue-700 transition"
