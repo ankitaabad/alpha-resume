@@ -8,6 +8,10 @@
 	$: console.log({ section_index });
 	// import { quill } from 'svelte-quill';
 	import ProfilePicture from './ProfilePicture.svelte';
+	import Delete from 'svelte-material-icons/Delete.svelte';
+	import Eye from 'svelte-material-icons/Eye.svelte';
+	import ArrowUp from 'svelte-material-icons/ArrowUp.svelte';
+	import ArrowDown from 'svelte-material-icons/ArrowDown.svelte';
 	let toolbarOptions = [
 		['link'],
 		['bold', 'italic'],
@@ -34,44 +38,77 @@
 </script>
 
 <div>
-	<div class="m-5 bg-white rounded-xl border-solid border border-gray-300" id="Education">
-		<h2 class="border-b border-solid border-gray-300 px-4 py-3 text-lg font-semibold">
+	<div class="m-5" id="Education">
+		<h2 class="py-3 text-lg font-semibold ">
 			{section_name}
 		</h2>
-		<div class="flex flex-col p-5">
+		<!-- p-5 bg-white  rounded-lg border-solid border border-gray-300 -->
+		<div class="flex flex-col gap-4">
 			{#each $store[resume_index].sections[section_index].items as { fields, id }}
-				{#each Object.entries(fields) as [key, field]}
-					{#if field.type === 'image'}
-						<div class="form-group flex flex-col gap-1 mb-4">
-							<label for="" class="text-sm text-gray-700">{field.label}</label>
+				<div class="bg-white rounded-lg border-solid border border-gray-300">
+					{#if section.items.length > 1}
+						<div
+							class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
+						>
+							<div>Skill 1</div>
+							<div class="flex items-center">
+								<button
+									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
+								>
+									<ArrowUp class=" text-gray-700  text-2xl" /></button
+								>
+								<button
+									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  font-bold"
+								>
+									<ArrowDown class=" text-gray-700   text-2xl" /></button
+								>
+								<button
+									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200  transition "
+								>
+									<Eye class=" text-gray-700  text-xl" /></button
+								>
+								<button
+									on:click={() => store.remove_section_item(section.id, id)}
+									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  "
+								>
+									<Delete class="text-gray-700  text-xl" /></button
+								>
+							</div>
+						</div>
+					{/if}
+					<div class="pt-5 px-5 pb-1  ">
+						{#each Object.entries(fields) as [key, field]}
+							{#if field.type === 'image'}
+								<div class="form-group flex flex-col gap-1 mb-4">
+									<label for="" class="text-sm text-gray-700">{field.label}</label>
 
-							<ProfilePicture />
-						</div>
-					{:else if field.type === 'text'}
-						<div class="form-group flex flex-col gap-1 mb-4">
-							<label for="" class="text-sm text-gray-700">{field.label}</label>
-							<input
-								type="text"
-								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
-								placeholder={field.placeholder}
-								bind:value={field.value}
-								on:keyup={() => (fields = fields)}
-							/>
-						</div>
-					{:else if field.type === 'textarea'}
-						<div class="form-group flex flex-col gap-1 mb-4">
-							<label for="" class="text-sm text-gray-700">Summary</label>
-							<textarea
-								id=""
-								cols="15"
-								rows="4"
-								class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
-								placeholder={field.label}
-								bind:value={field.value}
-								on:keyup={() => (fields = fields)}
-							/>
-						</div>
-						<!-- <div class="form-group flex flex-col gap-1 mb-4">
+									<ProfilePicture />
+								</div>
+							{:else if field.type === 'text'}
+								<div class="form-group flex flex-col gap-1 mb-4">
+									<label for="" class="text-sm text-gray-700">{field.label}</label>
+									<input
+										type="text"
+										class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
+										placeholder={field.placeholder}
+										bind:value={field.value}
+										on:keyup={() => (fields = fields)}
+									/>
+								</div>
+							{:else if field.type === 'textarea'}
+								<div class="form-group flex flex-col gap-1 mb-4">
+									<label for="" class="text-sm text-gray-700">Summary</label>
+									<textarea
+										id=""
+										cols="15"
+										rows="4"
+										class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
+										placeholder={field.label}
+										bind:value={field.value}
+										on:keyup={() => (fields = fields)}
+									/>
+								</div>
+								<!-- <div class="form-group flex flex-col gap-1 mb-4">
 							<label for="" class="text-sm text-gray-700">{field.label}</label>
 							<div
 								class="editor "
@@ -79,17 +116,12 @@
 								on:text-change={(e) => (field.value = e.detail.html)}
 							/>
 						</div> -->
-					{/if}
-				{/each}
-				{#if section.items.length > 1}
-					<button
-						on:click={() => store.remove_section_item(section.id, id)}
-						class=" mb-2 flex justify-center items-center gap-2 py-1 px-4 rounded-full text-red-700 border border-solid border-red-700 rb-button hover:text-white hover:bg-red-700 transition"
-					>
-						<Fa icon={faTrash} class=" text-red-700 " />Remove {section_name}</button
-					>
-				{/if}
+							{/if}
+						{/each}
+					</div>
+				</div>
 			{/each}
+
 			{#if section.max.toLowerCase() !== 'one'}
 				<button
 					class=" flex justify-center items-center gap-2 py-1 px-4 rounded-full text-blue-700 border border-solid border-blue-700 rb-button hover:text-white hover:bg-blue-700 transition"
