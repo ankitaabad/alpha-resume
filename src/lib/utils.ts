@@ -80,8 +80,8 @@ const get_blank_education = () => {
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			grade: cf('End Date'),
-			summary: cf('Summary', 'Summary', 'textarea'),
 			url: cf('URL'),
+			summary: cf('Summary', 'Summary', 'textarea'),
 		},
 		visible: Boolean(true),
 	};
@@ -95,8 +95,8 @@ const get_blank_experience = () => {
 			position: cf('Position'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
-			summary: cf('Summary', 'Summary', 'textarea'),
 			url: cf('URL'),
+			summary: cf('Summary', 'Summary', 'textarea'),
 		},
 		visible: Boolean(true),
 	};

@@ -39,18 +39,18 @@
 
 <div>
 	<div class="m-5" id="Education">
-		<h2 class="py-3 text-lg font-semibold ">
+		<!-- <h2 class="py-3 text-lg font-semibold ">
 			{section_name}
-		</h2>
+		</h2> -->
 		<!-- p-5 bg-white  rounded-lg border-solid border border-gray-300 -->
 		<div class="flex flex-col gap-4">
 			{#each $store[resume_index].sections[section_index].items as { fields, id }}
 				<div class="bg-white rounded-lg border-solid border border-gray-300">
-					{#if section.items.length > 1}
-						<div
-							class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
-						>
-							<div>{section.id}</div>
+          <div
+          class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
+          >
+          <div>{section.id}</div>
+					{#if section.type!=="Basic"}
 							<div class="flex items-center">
 								<button
 									on:click={() => store.move_section_item(section.id, id,'up')}
@@ -76,8 +76,8 @@
 									<Delete class="text-gray-700  text-xl" /></button
 								>
 							</div>
+              {/if}
 						</div>
-					{/if}
 					<div class="pt-5 px-5 pb-1  ">
 						{#each Object.entries(fields) as [key, field]}
 							{#if field.type === 'image'}
