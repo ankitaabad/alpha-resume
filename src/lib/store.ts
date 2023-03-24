@@ -43,7 +43,7 @@ export const get_all_resume_arr = (): Resume[] => {
 };
 function create_profile_store() {
 	const profiles = get_all_profiles();
-	const { subscribe, update } = writable(profiles);
+	const { subscribe, update,set } = writable(profiles);
 	const addImage = (profile: Profile) => {
 		console.log('add image called');
 		update((store) => {
@@ -56,6 +56,7 @@ function create_profile_store() {
 	return {
 		subscribe,
 		addImage,
+    set
 	};
 }
 
