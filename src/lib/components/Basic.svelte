@@ -51,7 +51,18 @@
 						<svelte:component this={get_social_icon('location')} class="inline text-gray-500" />
 						<span class="text-gray-500">{basic_data?.Location}</span>
 					</p>
+					{#each $preview_data?.['Social Profile']?.data as socialProfile}
 					<p
+					class="w-full"
+					class:hidden={socialProfile.Username == ''}
+				>
+					<svelte:component this={get_social_icon(socialProfile.Network)} class="inline text-gray-500" />
+					<a href={socialProfile.URL} class="text-gray-500"
+						>{socialProfile.Username}</a
+					>
+				</p>
+				{/each}
+					<!-- <p
 						class="w-full"
 						class:hidden={$preview_data?.['Social Profile']?.data[0].Username == ''}
 					>
@@ -59,7 +70,7 @@
 						<a href={$preview_data?.['Social Profile']?.data[0].URL} class="text-gray-500"
 							>{$preview_data?.['Social Profile']?.data[0].Username}</a
 						>
-					</p>
+					</p> -->
 				</div>
 			</div>
 		</div>
