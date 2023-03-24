@@ -57,7 +57,7 @@
 									on:click={() => store.move_section_item(section.id, id,'up')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
 								>
-									<ArrowUp  class=" text-gray-700  text-2xl" /></button
+									<ArrowUp class=" text-gray-700  text-2xl" /></button
 								>
 								<button
 									class:hidden={store.get_item_index(section.id,id)==section.items.length-1}
