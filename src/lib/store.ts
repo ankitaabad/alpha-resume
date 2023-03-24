@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 import { derived, get, writable } from 'svelte/store';
 import { get_blank_resume, get_blank_section_item, type Resume, type Section } from './utils';
 export const resume_id = writable(0);
-
+export const add_new_modal = writable(null);
 export type Profile = {
 	image: string;
 	type: 'round' | 'rect';
@@ -98,37 +98,36 @@ function create_all_resume() {
 			return ar;
 		});
 	};
-		const move_section_item = (section_id, item_id,type) => {
-			update((ar) => {
+	const move_section_item = (section_id, item_id, type) => {
+		update((ar) => {
 			const rid = get(resume_id);
 			const resume = get_resume();
 			const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
 			const item_index = section.items.findIndex((item) => item.id === item_id);
-			var item=section.items[item_index]
-			if (type=='up'){
-				var item2=section.items[item_index-1]
-				if(item2!=undefined){
-				section.items[item_index-1] = item;
-				section.items[item_index] = item2;
+			var item = section.items[item_index];
+			if (type == 'up') {
+				var item2 = section.items[item_index - 1];
+				if (item2 != undefined) {
+					section.items[item_index - 1] = item;
+					section.items[item_index] = item2;
 				}
-			}
-			else{
-				var item2=section.items[item_index+1]
-				if(item2!=undefined){
-				section.items[item_index+1] = item;
-				section.items[item_index] = item2;
+			} else {
+				var item2 = section.items[item_index + 1];
+				if (item2 != undefined) {
+					section.items[item_index + 1] = item;
+					section.items[item_index] = item2;
 				}
 			}
 			ar[rid] = resume;
 			return ar;
-			});
-		};
+		});
+	};
 
-  const update_font = (font:string) => {
+	const update_font = (font: string) => {
 		update((ar) => {
 			const rid = get(resume_id);
 			const resume = get_resume();
-      resume.settings.font = font
+			resume.settings.font = font;
 			ar[rid] = resume;
 			return ar;
 		});
@@ -139,9 +138,9 @@ function create_all_resume() {
 			return updated_resume_list;
 		});
 	};
-	const add_resume = () => {
+	const add_resume = (resume_name) => {
 		console.log('adding resume');
-		const blank_resume = get_blank_resume();
+		const blank_resume = get_blank_resume(resume_name);
 		update((ar) => {
 			ar.push(blank_resume);
 			return ar;
@@ -168,7 +167,7 @@ function create_all_resume() {
 		add_resume,
 		delete_resume,
 		edit_resume,
-    update_font,
+		update_font,
 	};
 }
 

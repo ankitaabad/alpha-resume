@@ -2,21 +2,22 @@
 	import { faAdd, faEdit, faCopy, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import NavBar from '$lib/components/NavBar.svelte';
-	import { store } from '$lib/store';
-	import Content from './content.svelte';
-	import Modal from 'svelte-simple-modal';
+	import { add_new_modal, store } from '$lib/store';
 
+	import Modal, { bind } from 'svelte-simple-modal';
+
+	const open = () => {
+    add_new_modal.set(bind(Popup));
+  }
 	import Pencil from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
+	import Popup from '$lib/components/Popup.svelte';
 	let src = './pattern.svg';
 </script>
 
 <div class="flex flex-col h-screen ">
 	<div class=" w-full ">
 		<NavBar />
-		<Modal>
-			<Content />
-		</Modal>
 	</div>
 	<div class="main-container flex bg-gray-100 w-full h-full">
 		<div class="content w-full ">
@@ -28,13 +29,15 @@
 						class="flex items-center justify-between w-full sticky top-0 left-0 px-8 pt-8 pb-6 bg-gray-100"
 					>
 						<h1 class="text-2xl font-semibold text-gray-900">My Resume</h1>
-						<a
-							on:click={() => store.add_resume()}
-							class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
-						>
-							<Fa icon={faAdd} class="text-white " />
-							Add New
-						</a>
+						<Modal show={$add_new_modal}>
+							<a
+								on:click={() => open(Popup)}
+								class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
+							>
+								<Fa icon={faAdd} class="text-white " />
+								Add New
+							</a>
+						</Modal>
 					</div>
 					<div class="grid grid-cols-2 gap-8 px-8 pb-8 lg:grid-cols-3 ">
 						{#each $store as { name, id }}
