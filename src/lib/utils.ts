@@ -80,7 +80,7 @@ const get_blank_education = () => {
 			institution: cf('Institution'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
-			grade: cf('End Date'),
+			grade: cf('Grade'),
 			url: cf('URL'),
 			summary: cf('Summary', 'Summary', 'textarea'),
 		},
