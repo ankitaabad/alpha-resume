@@ -56,7 +56,7 @@
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
 									class:bg-gray-200={store.get_item_index(section.id,id)==0}
 									disabled={store.get_item_index(section.id,id)==0}
-					
+													
 								>
 									<ArrowUp class=" text-gray-700  text-2xl" /></button
 								>
@@ -118,11 +118,11 @@
 								<div class="form-group flex flex-col gap-1 mb-4">
 									<label for="" class="text-sm text-gray-700">Network</label>
 									<select 
-										id=""
 										class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
 										placeholder={field.label}
 										bind:value={field.value}
 										on:keyup={() => (fields = fields)}
+										on:change={() => (fields = fields)}
 									>
 									<option value="" selected disabled>Choose Network</option>
 									<option value="linkedin">LinkedIn</option>
