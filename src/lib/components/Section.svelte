@@ -50,19 +50,21 @@
           >
           <div>{section.id}</div>
 					{#if section.type!=="Basic"}
-					<div class="flex">{store.get_item_index(section.id,id)+1}</div>
 							<div class="flex items-center">
 								<button
-									class:hidden={store.get_item_index(section.id,id)==0}
 									on:click={() => store.move_section_item(section.id, id,'up')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
+									class:bg-gray-200={store.get_item_index(section.id,id)==0}
+									disabled={store.get_item_index(section.id,id)==0}
+					
 								>
 									<ArrowUp class=" text-gray-700  text-2xl" /></button
 								>
 								<button
-									class:hidden={store.get_item_index(section.id,id)==section.items.length-1}
 									on:click={() => store.move_section_item(section.id, id,'down')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  font-bold"
+									class:bg-gray-200={store.get_item_index(section.id,id)==section.items.length-1}
+									disabled={store.get_item_index(section.id,id)==section.items.length-1}
 								>
 									<ArrowDown class=" text-gray-700   text-2xl" /></button
 								>
