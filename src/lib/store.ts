@@ -176,6 +176,7 @@ function create_all_resume() {
 		edit_resume,
     update_font,
 	get_item_index,
+	hide_item,
 	};
 }
 
