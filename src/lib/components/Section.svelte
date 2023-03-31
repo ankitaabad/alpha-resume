@@ -56,7 +56,7 @@
 							<div class="flex items-center">
 								<button
 									on:click={() => store.move_section_item(section.id, id,'up')}
-									class="flex justify-center items-center rounded-full hover:bg-gray-200 h-10 w-10 transition"
+									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
 									class:bg-gray-200={index==0}
 									disabled={index==0}
 					
