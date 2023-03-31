@@ -17,7 +17,7 @@
 	</div>
 	<div class="popup-body py-6">
 		<div class="form-group flex flex-col gap-2">
-			<label class="text-xl text-gray-700" for="">Resume Name</label>
+			<label class=" text-gray-700 text-sm" for="">Resume Name</label>
 			<input
 				id="create_new_resume_modal"
 				bind:value={resume_name}

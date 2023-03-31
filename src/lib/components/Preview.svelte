@@ -4,6 +4,10 @@
 	import { get } from 'svelte/store';
 	import Basic from './Basic.svelte';
 	import Experience from './Experience.svelte';
+	import Education from './Education.svelte';
+	import Projects from './Projects.svelte';
+	import Certificates from './Certificates.svelte';
+	import Skills from './Skills.svelte';
 	$: profile = $profile_store[get(resume_id)];
 	$: console.log({ Profile_type: profile?.image });
 	let src = './favicon.png';
@@ -14,7 +18,7 @@
 	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
 	$: console.log({ currentFont });
 	const selectFont = (font) => {
-    store.update_font(font)
+		store.update_font(font);
 		currentFont = font;
 		hideFontSelectBox = true;
 	};
@@ -24,9 +28,11 @@
 	<!--Action header-->
 	<div
 		class="h-14
-	 bg-white  px-5 flex text-base text-gray-700 items-center font-medium border-b border-solid border-gray-300"
+	 bg-white  px-5 flex justify-between text-base text-gray-700 items-center font-medium border-b border-solid border-gray-300"
 	>
-		<div class="relative flex gap-2 w-6/12">
+		<div>Hitesh Kumawat</div>
+
+		<div class="relative flex gap-2 ">
 			<div class="">
 				<button
 					type="button"
@@ -38,7 +44,7 @@
 					on:outclick={() => (hideFontSelectBox = true)}
 					on:click={() => (hideFontSelectBox ^= true)}
 				>
-					Font ( {currentFont} )
+					Font ({currentFont})
 					<svg
 						class="-mr-1 h-5 w-5 text-gray-400"
 						viewBox="0 0 20 20"
@@ -53,18 +59,8 @@
 					</svg>
 				</button>
 			</div>
-			<!--
-		  Dropdown menu, show/hide based on menu state.
-	  
-		  Entering: "transition ease-out duration-100"
-			From: "transform opacity-0 scale-95"
-			To: "transform opacity-100 scale-100"
-		  Leaving: "transition ease-in duration-75"
-			From: "transform opacity-100 scale-100"
-			To: "transform opacity-0 scale-95"
-		-->
 			<div
-				class="absolute left-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+				class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 				class:hidden={hideFontSelectBox}
 				role="menu"
 				aria-orientation="vertical"
@@ -89,58 +85,15 @@
 	<!--Template HTML-->
 	<div class="overflow-auto max-h-[83vh] bg-gray-50 py-4 " style={`font-family: ${currentFont}`}>
 		<div
-			class="bg-white flex flex-col max-w-3xl mx-auto  shadow border border-solid border-gray-100"
+			class="bg-white flex flex-col max-w-3xl min-h-screen mx-auto  shadow border border-solid border-gray-100"
 		>
-			<div id="preview" class="page px-6 py-8">
+			<div id="preview" class="page p-5">
 				<Basic />
-				<!-- header -->
-				<!-- <div class="flex border-b border-solid border-gray-300 pb-6 gap-6">
-					<div
-						class="aspect-square w-36 h-36 bg-transparent flex items-center justify-center"
-						class:hidden={profile?.image === ''}
-					>
-						<img
-							src={profile?.image}
-							class:rounded-full={profile?.type === 'round'}
-							alt="profile"
-						/>
-					</div>
-					<div class="profile-details w-full">
-						<h1 class="text-2xl font-bold ">{preview_data?.Basic?.data[0]?.Name}</h1>
-						<div class=" mb-4">Product Designer</div>
-						<div class="flex gap-3 flex-col">
-							<div class="flex  gap-6">
-								<p class="w-1/2" class:hidden={preview_data?.Basic?.data[0].Email == ''}>
-									<a href={preview_data?.Basic?.data[0].Email} class="text-gray-500"
-										><span class="text-gray-900">Email:</span>
-										{preview_data?.Basic?.data[0].Email}</a
-									>
-								</p>
-								<p class="w-1/2">
-									<a href="/" class="text-gray-500"
-										><span class="text-gray-900">Phone:</span> +91 7737379242</a
-									>
-								</p>
-							</div>
-							<div class="flex  gap-6">
-								<p class="w-1/2">
-									<a href="/" class="text-gray-500"
-										><span class="text-gray-900">Website:</span> hiteshkumawat.com</a
-									>
-								</p>
-								<p class="w-1/2">
-									<span class="text-gray-900">Location:</span>
-									<span class="text-gray-500">Jaipur</span>,
-									<span class="text-gray-500">Rajasthan</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				<!-- container -->
-				<!-- <div class="flex flex-col p-5  "> -->
-				<!-- profile -->
-        <Experience/>
+				<Experience />
+				<Education />
+				<Projects />
+				<Certificates />
+				<Skills />
 				<div class="hidden">
 					<div class="profile border-b border-solid border-gray-300 py-6">
 						<h2 class="text-xl font-bold mb-3">Profile</h2>
@@ -310,6 +263,6 @@
 <style>
 	.page {
 		/* width: 210mm; */
-		height: 297mm;
+		/* height: 297mm; */
 	}
 </style>

@@ -7,8 +7,8 @@
 	import Modal, { bind } from 'svelte-simple-modal';
 
 	const open = () => {
-    add_new_modal.set(bind(Popup));
-  }
+		add_new_modal.set(bind(Popup));
+	};
 	import Pencil from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Popup from '$lib/components/Popup.svelte';

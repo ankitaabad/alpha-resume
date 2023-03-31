@@ -75,9 +75,9 @@ const get_blank_education = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
-			area: cf('Area'),
-			degree: cf('Degree'),
 			institution: cf('Institution'),
+			area: cf('Area of Study'),
+			degree: cf('Degree'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			grade: cf('Grade'),
@@ -92,8 +92,8 @@ const get_blank_experience = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
-			name: cf('Name'),
-			position: cf('Position'),
+			cname: cf('Company Name'),
+			job_title: cf('Job Title'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			url: cf('URL'),
@@ -135,7 +135,7 @@ export const get_blank_certificate = () => {
 		id: get_unique_id(),
 		fields: {
 			name: cf('Name'),
-			issuer: cf('issuer'),
+			issuer: cf('Issuer'),
 			date: cf('Date'),
 			url: cf('URL'),
 			summary: cf('Summary', 'Summary', 'textarea'),
@@ -150,7 +150,7 @@ const get_blank_social_profile = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
-			network: cf('Network','Network','dropdown'),
+			network: cf('Network', 'Network', 'dropdown'),
 			username: cf('Username'),
 			url: cf('URL'),
 		},
