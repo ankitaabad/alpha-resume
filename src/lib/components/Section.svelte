@@ -12,7 +12,6 @@
 	import Eye from 'svelte-material-icons/Eye.svelte';
 	import ArrowUp from 'svelte-material-icons/ArrowUp.svelte';
 	import ArrowDown from 'svelte-material-icons/ArrowDown.svelte';
-	var index=0;
 	let toolbarOptions = [
 		['link'],
 		['bold', 'italic'],
@@ -51,14 +50,12 @@
           >
           <div>{section.id}</div>
 					{#if section.type!=="Basic"}
-					
-					<div class="flex hidden">{index=store.get_item_index(section.id,id)}</div>
 							<div class="flex items-center">
 								<button
 									on:click={() => store.move_section_item(section.id, id,'up')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition "
-									class:bg-gray-200={index==0}
-									disabled={index==0}
+									class:bg-gray-200={store.get_item_index(section.id,id)==0}
+									disabled={store.get_item_index(section.id,id)==0}
 					
 								>
 									<ArrowUp class=" text-gray-700  text-2xl" /></button
@@ -66,8 +63,8 @@
 								<button
 									on:click={() => store.move_section_item(section.id, id,'down')}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  font-bold"
-									class:bg-gray-200={index==section.items.length-1}
-									disabled={index==section.items.length-1}
+									class:bg-gray-200={store.get_item_index(section.id,id)==section.items.length-1}
+									disabled={store.get_item_index(section.id,id)==section.items.length-1}
 								>
 									<ArrowDown class=" text-gray-700   text-2xl" /></button
 								>
