@@ -10,7 +10,6 @@ export type Profile = {
 };
 
 export const get_all_profiles = (): Record<string, Profile> => {
-	console.log('get all profile called');
 	let image_data = {};
 	if (browser) {
 		const data = localStorage.getItem('all_profiles');
@@ -20,12 +19,10 @@ export const get_all_profiles = (): Record<string, Profile> => {
 			image_data = JSON.parse(data);
 		}
 	}
-	console.log({ image_data });
 	return image_data;
 };
 export const get_ls_resume = (id: number): Resume | undefined => {
 	const resume_data = get_all_resume_arr();
-	console.log({ all_reusme: resume_data, id });
 	const resume = resume_data.find((item) => item.id === id);
 	return resume;
 };
@@ -43,11 +40,9 @@ export const get_all_resume_arr = (): Resume[] => {
 };
 function create_profile_store() {
 	const profiles = get_all_profiles();
-	const { subscribe, update,set } = writable(profiles);
+	const { subscribe, update, set } = writable(profiles);
 	const addImage = (profile: Profile) => {
-		console.log('add image called');
 		update((store) => {
-			console.log('inside image update');
 			store[get(resume_id)] = profile;
 			return store;
 		});
@@ -56,7 +51,7 @@ function create_profile_store() {
 	return {
 		subscribe,
 		addImage,
-    set
+		set,
 	};
 }
 
@@ -138,7 +133,7 @@ function create_all_resume() {
 		const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
 		const item_index = section.items.findIndex((item) => item.id === item_id);
 		return item_index;
-};
+	};
 	const delete_resume = (resume_id) => {
 		update((ar) => {
 			const updated_resume_list = ar.filter((resume) => resume.id !== resume_id);
@@ -146,7 +141,6 @@ function create_all_resume() {
 		});
 	};
 	const add_resume = (resume_name) => {
-		console.log('adding resume');
 		const blank_resume = get_blank_resume(resume_name);
 		update((ar) => {
 			ar.push(blank_resume);
@@ -158,7 +152,6 @@ function create_all_resume() {
 	};
 
 	const edit_resume = (id) => {
-		console.log('editing resume');
 		const path = `/resume?id=${id}`;
 		goto(path);
 	};
@@ -174,8 +167,8 @@ function create_all_resume() {
 		add_resume,
 		delete_resume,
 		edit_resume,
-    update_font,
-	get_item_index,
+		update_font,
+		get_item_index,
 	};
 }
 
@@ -184,15 +177,12 @@ export const profile_store = create_profile_store();
 export const imageCropWindowDisplay = writable(false);
 
 store.subscribe((data) => {
-	console.log('store being updated');
 	if (browser) {
 		localStorage.setItem('all_resume', JSON.stringify(data));
-		console.log('after localstorage update');
 	}
 });
 
 profile_store.subscribe((data) => {
-	console.log('profile store subscribe called ');
 	if (browser) {
 		localStorage.setItem('all_profiles', JSON.stringify(data));
 	}
@@ -205,12 +195,9 @@ export const font = derived([store, resume_id], ([$store, $resume_id]) => {
 export const preview_data = derived(
 	[store, resume_id, profile_store],
 	([$store, $resume_id, $profile_store]) => {
-		console.log('Preview_data derived store called');
-
 		if ($resume_id) {
-			console.log({ resume_id: $resume_id });
 			const resume = $store.find((resume) => resume.id === $resume_id);
-			console.log({ resume });
+
 			const profile = $profile_store[$resume_id];
 			let preview_data = {};
 			resume.sections.forEach((section) => {
@@ -224,7 +211,7 @@ export const preview_data = derived(
 					return field_data;
 				});
 			});
-			console.log({ preview_data });
+
 			return preview_data;
 		}
 	},
@@ -241,7 +228,6 @@ export const get_resume_index = () => {
 	return get(store).findIndex((resume) => resume.id === get(resume_id));
 };
 export function download() {
-	console.log('inside download button');
 	const element = document.getElementById('preview');
 	element.style.fontFamily = get(font) || 'Inter';
 	html2pdf(element, { html2canvas: { scale: 2 } });

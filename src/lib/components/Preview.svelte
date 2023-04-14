@@ -8,15 +8,15 @@
 	import Projects from './Projects.svelte';
 	import Certificates from './Certificates.svelte';
 	import Skills from './Skills.svelte';
+	import Pencil from 'svelte-material-icons/Pencil.svelte';
 	$: profile = $profile_store[get(resume_id)];
-	$: console.log({ Profile_type: profile?.image });
+
 	let src = './favicon.png';
 	let preview_data = {};
 	// export let settings;
 	let hideFontSelectBox = true;
 	let fonts = ['Dosis', 'Inter', 'Roboto', 'Patrick Hand'];
 	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
-	$: console.log({ currentFont });
 
 	let resume_index = get_resume_index();
 	const selectFont = (font) => {
@@ -27,11 +27,9 @@
 	let editing_name = false;
 
 	document.onkeydown = function (e) {
-    console.log("enter event called")
 		e = e || window.event;
 		switch (e.which || e.keyCode) {
 			case 13: //Your Code Here (13 is ascii code for 'ENTER')
-				console.log('enter pressed');
 				editing_name = false;
 				if (document.querySelector('#change_resume_name') === document.activeElement) {
 				}
@@ -50,9 +48,13 @@
 			<input type="text" class="border px-3" bind:value={$store[resume_index].name} />
 		{:else}
 			<div class="flex">
-				<div class="px-2 bg-slate-100 rounded-md">{$store[resume_index].name}</div>
-				<button on:click={() => (editing_name = true)} class="px-2 bg-blue-200 rounded">Edit</button
+				<div class="px-2 bg-white rounded-md">{$store[resume_index].name}</div>
+				<button
+					on:click={() => (editing_name = true)}
+					class="px-2 bg-gray-200 rounded hover:bg-gray-100 transition"
 				>
+					<Pencil class="text-gray-700" />
+				</button>
 			</div>
 		{/if}
 
@@ -111,7 +113,7 @@
 		<div
 			class="bg-white flex flex-col max-w-3xl min-h-screen mx-auto  shadow border border-solid border-gray-100"
 		>
-			<div id="preview" class="page p-5">
+			<div id="preview" class="page p-8">
 				<Basic />
 				<Experience />
 				<Education />

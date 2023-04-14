@@ -1,5 +1,6 @@
 <script>
 	import { preview_data } from '$lib/store';
+	import OpenInNew from 'svelte-material-icons/OpenInNew.svelte';
 </script>
 
 <h2 class="text-xl font-semibold ">Experience</h2>
@@ -9,7 +10,16 @@
 		<div class="mb-3 flex flex-col gap-2 w-full">
 			<div class="flex justify-between">
 				<div>
-					<div class="font-medium">{exp['Company Name']}</div>
+					<div class="font-medium">
+						<a
+							href={exp.URL}
+							class="text-gray-700 flex gap-1 items-center  transition"
+							target="_blank"
+						>
+							{exp['Company Name']}
+							<OpenInNew class="text-blue-700 hover:text-blue-600" />
+						</a>
+					</div>
 					<span class="text-gray-500 text-sm">{exp['Job Title']}</span>
 				</div>
 				<div class="text-sm">
@@ -23,9 +33,6 @@
 				<p class="text-gray-500 text-justify">
 					{exp.Summary}
 				</p>
-				<div class="text-sm">
-					<a href={exp.URL} class="text-blue-700" target="_blank">{exp.URL}</a>
-				</div>
 			</div>
 		</div>
 	{/each}

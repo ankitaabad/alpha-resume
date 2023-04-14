@@ -6,12 +6,8 @@
 	let network;
 	profile_store.subscribe((value) => {
 		avatar = value[get(resume_id)];
-		console.log('inside subscribe');
-		console.log({ value });
-		console.log({ reusme_index: get(resume_id) });
-		console.log({ avatar });
 	});
-	$: console.log({ avatar });
+
 	$: basic_data = $preview_data?.Basic?.data[0];
 	$: social_profiles = $preview_data?.['Social Profile']?.data;
 </script>
@@ -19,7 +15,7 @@
 <div>
 	<!-- <h1 class="text-2xl font-semibold ">{$preview_data?.['Social Profile']?.data[0]?.Network}</h1> -->
 
-	<div class={basic_data.Name ? 'flex pb-6 gap-6 ' : 'flex'}>
+	<div class={basic_data.Name ? 'flex pb-7 gap-6 ' : 'flex'}>
 		<div
 			class="aspect-square w-28 h-28 bg-transparent flex items-center justify-center"
 			class:hidden={avatar?.image === undefined}
@@ -36,13 +32,15 @@
 			<div class="flex gap-3 flex-col">
 				<div class="flex flex-col gap-1">
 					<p class="w-full" class:hidden={basic_data?.Email == ''}>
-						<a href={basic_data?.Email} class="text-gray-500 flex items-center gap-1">
+						<a href="mailto:{basic_data?.Email}" class="text-gray-500 flex items-center gap-1">
 							<svelte:component this={get_social_icon('email')} class="inline" />
 							<span>{basic_data?.Email}</span>
 						</a>
 					</p>
 					<p class="w-full" class:hidden={$preview_data?.Basic?.data[0].Phone == ''}>
-						<a href="/" class="text-gray-500 flex items-center gap-1"
+						<a
+							href="tel:{$preview_data?.Basic?.data[0].Phone}"
+							class="text-gray-500 flex items-center gap-1"
 							><svelte:component this={get_social_icon('phone')} class="inline" />{$preview_data
 								?.Basic?.data[0].Phone}</a
 						>

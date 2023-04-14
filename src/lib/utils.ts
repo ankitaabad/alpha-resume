@@ -76,7 +76,7 @@ const get_blank_education = () => {
 		id: get_unique_id(),
 		fields: {
 			institution: cf('Institution'),
-			area: cf('Area of Study'),
+			//area: cf('Area of Study'),
 			degree: cf('Degree'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
@@ -88,6 +88,7 @@ const get_blank_education = () => {
 	};
 };
 export type EducationItem = ReturnType<typeof get_blank_education>;
+
 const get_blank_experience = () => {
 	return {
 		id: get_unique_id(),
@@ -103,6 +104,7 @@ const get_blank_experience = () => {
 	};
 };
 export type ExperienceItem = ReturnType<typeof get_blank_experience>;
+
 const get_blank_skill = () => {
 	return {
 		id: get_unique_id(),
