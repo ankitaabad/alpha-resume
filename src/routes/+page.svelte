@@ -12,9 +12,11 @@
 	import Pencil from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Popup from '$lib/components/Popup.svelte';
+	import CustomPill from '$lib/components/CustomPill.svelte';
 	let src = './pattern.svg';
 </script>
 
+<!-- <CustomPill></CustomPill> -->
 <div class="flex flex-col h-screen ">
 	<div class=" w-full ">
 		<NavBar />

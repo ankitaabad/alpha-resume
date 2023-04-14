@@ -1,6 +1,6 @@
 <script>
 	import { clickOutside } from '$lib/outclick';
-	import { font, profile_store, resume_id, store } from '$lib/store';
+	import { font, get_resume, get_resume_index, profile_store, resume_id, store } from '$lib/store';
 	import { get } from 'svelte/store';
 	import Basic from './Basic.svelte';
 	import Experience from './Experience.svelte';
@@ -17,10 +17,26 @@
 	let fonts = ['Dosis', 'Inter', 'Roboto', 'Patrick Hand'];
 	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
 	$: console.log({ currentFont });
+
+	let resume_index = get_resume_index();
 	const selectFont = (font) => {
 		store.update_font(font);
 		currentFont = font;
 		hideFontSelectBox = true;
+	};
+	let editing_name = false;
+
+	document.onkeydown = function (e) {
+    console.log("enter event called")
+		e = e || window.event;
+		switch (e.which || e.keyCode) {
+			case 13: //Your Code Here (13 is ascii code for 'ENTER')
+				console.log('enter pressed');
+				editing_name = false;
+				if (document.querySelector('#change_resume_name') === document.activeElement) {
+				}
+				break;
+		}
 	};
 </script>
 
@@ -30,7 +46,15 @@
 		class="h-14
 	 bg-white  px-5 flex justify-between text-base text-gray-700 items-center font-medium border-b border-solid border-gray-300"
 	>
-		<div>Hitesh Kumawat</div>
+		{#if editing_name}
+			<input type="text" class="border px-3" bind:value={$store[resume_index].name} />
+		{:else}
+			<div class="flex">
+				<div class="px-2 bg-slate-100 rounded-md">{$store[resume_index].name}</div>
+				<button on:click={() => (editing_name = true)} class="px-2 bg-blue-200 rounded">Edit</button
+				>
+			</div>
+		{/if}
 
 		<div class="relative flex gap-2 ">
 			<div class="">
