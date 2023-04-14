@@ -1,5 +1,5 @@
 <script>
-	import { imageCropWindowDisplay } from '$lib/store';
+	import { imageCropWindowDisplay,profile_store } from '$lib/store';
 	import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	let src = './default-pp.svg';
@@ -44,4 +44,11 @@
 		on:change={(e) => onFileSelected(e)}
 		bind:this={fileinput}
 	/>
+</div>
+<div class="flex w-5/12">
+	<button class="bg-blue-700 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600" 
+	on:click={async () => {
+		profile_store.addImage({ image: undefined});
+	}}>
+	Reset Profile Picture</button>
 </div>
