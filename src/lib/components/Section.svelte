@@ -43,7 +43,7 @@
 		</h2> -->
 		<!-- p-5 bg-white  rounded-lg border-solid border border-gray-300 -->
 		<div class="flex flex-col gap-4">
-			{#each $store[resume_index].sections[section_index].items as { fields, id }}
+			{#each $store[resume_index].sections[section_index].items as { fields, id },index}
 				<div class="bg-white rounded-lg border-solid border border-gray-300">
 					<div
 						class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
@@ -57,7 +57,7 @@
 									class:bg-gray-200={store.get_item_index(section.id, id) == 0}
 									disabled={store.get_item_index(section.id, id) == 0}
 								>
-									<ArrowUp class=" text-gray-700  text-2xl" /></button
+									<ArrowUp class= " text-2xl {index ===0?'text-gray-300':'text-gray-700'}" /></button
 								>
 
 								<button
@@ -69,7 +69,7 @@
 										section.items.length - 1}
 									disabled={store.get_item_index(section.id, id) == section.items.length - 1}
 								>
-									<ArrowDown class=" text-gray-700   text-2xl" /></button
+									<ArrowDown class=" text-2xl {index === $store[resume_index].sections[section_index].items.length -1?'text-gray-300':'text-gray-700'}" /></button
 								>
 								<!-- <button
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200  transition active:bg-gray-400"
@@ -131,6 +131,8 @@
 										<option value="linkedin">LinkedIn</option>
 										<option value="google">Google</option>
 										<option value="facebook">Facebook</option>
+                    <option value ="twitter">Twitter</option>
+                    <option value ="youtube">Youtube</option>
 									</select>
 								</div>
 								<!-- <div class="form-group flex flex-col gap-1 mb-4">

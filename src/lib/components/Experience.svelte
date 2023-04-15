@@ -1,6 +1,8 @@
 <script>
 	import { preview_data } from '$lib/store';
+	import { ae } from '$lib/utils';
 	import OpenInNew from 'svelte-material-icons/OpenInNew.svelte';
+	import LinkItem from './LinkItem.svelte';
 </script>
 
 <h2 class="text-xl font-semibold ">Experience</h2>
@@ -11,16 +13,11 @@
 			<div class="flex justify-between">
 				<div>
 					<div class="font-medium">
-						<a
-							href={exp.URL}
-							class="text-gray-700 flex gap-1 items-center  transition"
-							target="_blank"
-						>
-							{exp['Company Name']}
-							<OpenInNew class="text-blue-700 hover:text-blue-600" />
-						</a>
+						{exp['Job Title']}
 					</div>
-					<span class="text-gray-500 text-sm">{exp['Job Title']}</span>
+					<div>
+            <LinkItem value = {exp['Company Name']} url = {exp['URL']}/>
+					</div>
 				</div>
 				<div class="text-sm">
 					<span class="text-gray-500 text-xs">{exp['Start Date']}</span>&nbsp;-&nbsp;<span

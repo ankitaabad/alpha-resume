@@ -1,0 +1,29 @@
+// replace resume with résumé for pronunciation accuracy
+Craft a compelling resume with Easy-Resume. 
+Go to easyresume.compile7.org.
+click on create resume. Enter the name of your resume. Press enter. 
+You have 3 sections here. 
+First one to navigate between the sections. second one to add your details and third one to check preview. 
+Let us fill in some details. You can check the generated preview.
+In the basic section click on profile photo to upload photo.
+select Your profile photo.
+You can choose a round or a rectangle shape for your photo.
+let me add some basic details.
+Now lets move to social profiles. Let us add linkedin profile to our resume.
+Now let us add experience section. Here you can add multiple sections, change their order and delete them if required.
+
+Let me quickly add other details.
+
+
+Change font
+
+change name of the resume
+
+Downloaded resume, and You quickly get a perfectly laid out resume.
+Now let me show how the links work in your resume.
+lets up open it in our phone.
+If you click on linkedin profile it opens
+
+
+return to home page, here all your resume will be listed.
+we don't store any of your data in server. All data is local to your browser. You can export it and import to different browser. let me show you how. so Import export

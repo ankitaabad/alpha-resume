@@ -19,8 +19,12 @@ import Email from 'svelte-material-icons/Email.svelte';
 import Phone from 'svelte-material-icons/Phone.svelte';
 import MapMarker from 'svelte-material-icons/MapMarker.svelte';
 import Facebook from 'svelte-material-icons/Facebook.svelte';
+
+import Twitter from 'svelte-material-icons/Twitter.svelte';
 import Google from 'svelte-material-icons/Google.svelte';
 import Linkedin from 'svelte-material-icons/Linkedin.svelte';
+
+import Youtube from 'svelte-material-icons/Youtube.svelte';
 import Account from 'svelte-material-icons/Account.svelte';
 import CertificateOutline from 'svelte-material-icons/CertificateOutline.svelte';
 import School from 'svelte-material-icons/School.svelte';
@@ -271,6 +275,8 @@ const social_icon = {
 	facebook: Facebook,
 	google: Google,
 	linkedin: Linkedin,
+	twitter: Twitter,
+	youtube: Youtube,
 	email: Email,
 	phone: Phone,
 	location: MapMarker,
@@ -285,7 +291,33 @@ const social_icon = {
 export const get_social_icon = (name: keyof typeof social_icon) => {
 	return social_icon[name];
 };
+/**
+ * any value is empty then it returns true
+ */
+export const empty = (value) => {
+  return !(value && value !=="")
+}
+export const ae = (...values) => {
+	console.log('ae called', values);
+	return !values.reduce((prev, next) => {
+		return prev && next && next !== '';
+	}, true);
+};
+export const is_value_in_arr = (items: any[]) => {
+  console.log({items_in_arr: items})
+	return items.some((item) => {
+		return is_value_in_obj(item);
+	});
+};
 
+export const is_value_in_obj = (obj: Record<string,any>) => {
+	for (const key in obj) {
+		if (!empty(obj[key])) {
+			return true;
+		}
+	}
+	return false;
+};
 // export const get_resume_data_for_preview() => {
 //   const resume = get_resume();
 //   const result = {}

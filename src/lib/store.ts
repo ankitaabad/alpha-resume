@@ -230,7 +230,7 @@ export const get_resume_index = () => {
 export function download() {
 	const element = document.getElementById('preview');
 	element.style.fontFamily = get(font) || 'Inter';
-	html2pdf(element, { html2canvas: { scale: 2 } });
+	html2pdf(element, { html2canvas: { scale: 2 },filename: `${get_resume().name}.pdf` });
 }
 
 export const get_resume = () => {

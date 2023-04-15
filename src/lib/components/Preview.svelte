@@ -9,32 +9,44 @@
 	import Certificates from './Certificates.svelte';
 	import Skills from './Skills.svelte';
 	import Pencil from 'svelte-material-icons/Pencil.svelte';
+	import { onMount, tick } from 'svelte';
 	$: profile = $profile_store[get(resume_id)];
 
 	let src = './favicon.png';
 	let preview_data = {};
 	// export let settings;
 	let hideFontSelectBox = true;
-	let fonts = ['Dosis', 'Inter', 'Roboto', 'Patrick Hand'];
+	let fonts = ['Dosis', 'Inter', 'Roboto', 'Patrick Hand', 'Montaga', 'Poppins'];
 	$: currentFont = fonts.find((item) => item === $font) || 'Inter';
-
+	$: console.log({ editing_name });
 	let resume_index = get_resume_index();
+	let edit_resume_name_input;
+
 	const selectFont = (font) => {
 		store.update_font(font);
 		currentFont = font;
 		hideFontSelectBox = true;
 	};
 	let editing_name = false;
-
-	document.onkeydown = function (e) {
-		e = e || window.event;
-		switch (e.which || e.keyCode) {
-			case 13: //Your Code Here (13 is ascii code for 'ENTER')
-				editing_name = false;
-				if (document.querySelector('#change_resume_name') === document.activeElement) {
-				}
-				break;
-		}
+	const start_editing = async () => {
+		editing_name = true;
+		await tick();
+		edit_resume_name_input.onkeydown = function (e) {
+			console.log('enter event called');
+			e = e || window.event;
+			switch (e.which || e.keyCode) {
+				case 13: //Your Code Here (13 is ascii code for 'ENTER')
+					console.log('enter pressed');
+					editing_name = false;
+					break;
+			}
+		};
+		edit_resume_name_input.focus();
+	};
+	let clickUpdate = () => {
+		console.log('clickupdate called');
+		document.querySelector('#update_resume_name_btn')?.click();
+		editing_name = false;
 	};
 </script>
 
@@ -45,12 +57,23 @@
 	 bg-white  px-5 flex justify-between text-base text-gray-700 items-center font-medium border-b border-solid border-gray-300"
 	>
 		{#if editing_name}
-			<input type="text" class="border px-3" bind:value={$store[resume_index].name} />
+			<input
+				type="text"
+				bind:this={edit_resume_name_input}
+				class="border px-3 m-0 w-40"
+				on:focusout={() => clickUpdate()}
+				bind:value={$store[resume_index].name}
+			/>
+			<input
+				type="hidden"
+				id="update_resume_name_btn"
+				class="px-3 bg-gray-200 rounded hover:bg-gray-100 transition"
+			/>
 		{:else}
 			<div class="flex">
 				<div class="px-2 bg-white rounded-md">{$store[resume_index].name}</div>
 				<button
-					on:click={() => (editing_name = true)}
+					on:click={() => start_editing()}
 					class="px-2 bg-gray-200 rounded hover:bg-gray-100 transition"
 				>
 					<Pencil class="text-gray-700" />

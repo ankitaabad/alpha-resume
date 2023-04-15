@@ -1,6 +1,6 @@
 <script>
 	import { get_resume_index, preview_data, profile_store, resume_id } from '$lib/store';
-	import { get_social_icon } from '$lib/utils';
+	import { get_social_icon, ae } from '$lib/utils';
 	import { get } from 'svelte/store';
 	let avatar;
 	let network;
@@ -55,7 +55,7 @@
 								this={get_social_icon(socialProfile.Network)}
 								class="inline text-gray-500"
 							/>
-							<a href={socialProfile.URL} class="text-gray-500">{socialProfile.Username}</a>
+							<a href="\\{socialProfile.URL}" class="text-gray-500">{socialProfile.Username}</a>
 						</p>
 					{/each}
 				</div>
@@ -63,10 +63,11 @@
 		</div>
 	</div>
 	<!-- container -->
-	<div class="flex flex-col  ">
+
+	<div class="flex flex-col" class:hidden={ae(basic_data?.Summary)}>
 		<!-- profile -->
 		<div class={basic_data?.Summary ? 'profile pb-5 ' : ''}>
-			<h2 class="text-xl font-semibold " class:hidden={basic_data?.Summary === ''}>About Me</h2>
+			<h2 class="text-xl font-semibold">About Me</h2>
 			<div class="mb-2  border-b border-solid border-gray-300" />
 			<p class="text-gray-500 text-justify">
 				{basic_data?.Summary}

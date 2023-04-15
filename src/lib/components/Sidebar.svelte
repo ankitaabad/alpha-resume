@@ -11,9 +11,11 @@
 
 	onMount(() => {
 		document.onkeydown = (e) => {
+      const pressedKey = e.key.toLowerCase();
+
 			const len = no_of_sections();
 			var activeElement = document.activeElement;
-
+      
 			if (
 				activeElement &&
 				(activeElement.tagName.toLowerCase() === 'input' ||
@@ -22,7 +24,6 @@
 			) {
 				return;
 			}
-			const pressedKey = e.key.toLowerCase();
 			if (pressedKey === 'n') {
 				index = (index + 1) % len;
 			} else if (pressedKey === 'p') {

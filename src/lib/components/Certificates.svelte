@@ -22,7 +22,7 @@
 					{cer.Summary}
 				</p>
 				<div class="text-sm">
-					<a href={cer.URL} class="text-blue-700" target="_blank">{cer.URL}</a>
+					<a href="\\{cer.URL}" class="text-blue-700" target="_blank">{cer.URL}</a>
 				</div>
 			</div>
 		</div>

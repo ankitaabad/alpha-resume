@@ -24,7 +24,7 @@
 					{pro.Summary}
 				</p>
 				<div class="text-sm">
-					<a href={pro.URL} class="text-blue-700" target="_blank">{pro.URL}</a>
+					<a href="\\{pro.URL}" class="text-blue-700" target="_blank">{pro.URL}</a>
 				</div>
 			</div>
 		</div>

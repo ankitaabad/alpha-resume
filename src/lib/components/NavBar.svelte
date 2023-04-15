@@ -51,7 +51,7 @@
 
 		element.style.display = 'none';
 		document.body.appendChild(element);
-
+    element.download = 'EZResume.txt'
 		element.click();
 
 		document.body.removeChild(element);
