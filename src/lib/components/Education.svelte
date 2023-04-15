@@ -1,6 +1,9 @@
 <script>
 	import { preview_data } from '$lib/store';
 	import { is_value_in_arr } from '$lib/utils';
+	import HyphenDate from './HyphenDate.svelte';
+	import Hyphen from './HyphenDate.svelte';
+	import LinkItem from './LinkItem.svelte';
 </script>
 
 <div class:hidden={!is_value_in_arr($preview_data.Education.data)}>
@@ -12,14 +15,14 @@
 				<div class="flex justify-between">
 					<div>
 						<div class="font-medium">{edu.Degree}</div>
-						<span class="text-gray-500 text-sm">{edu.Institution} </span>
+            <LinkItem value={edu.Institution} url={edu.URL} subheader={true}/>
 					</div>
 					<div class="text-sm flex flex-col gap-1">
 						<div class="text-gray-700  flex justify-end font-medium">{edu.Grade}</div>
 						<div>
-							<span class="text-gray-500 text-xs">{edu['Start Date']}</span>&nbsp;-&nbsp;<span
-								class="text-gray-500 text-xs">{edu['End Date']}</span
-							>
+              <HyphenDate
+							date_obj = {edu}
+						/>	
 						</div>
 					</div>
 				</div>
@@ -28,9 +31,7 @@
 					<p class="text-gray-500 text-justify">
 						{edu.Summary}
 					</p>
-					<div class="text-sm">
-						<a href="\\{edu.URL}" class="text-blue-700" target="_blank">{edu.URL}</a>
-					</div>
+					
 				</div>
 			</div>
 		{/each}

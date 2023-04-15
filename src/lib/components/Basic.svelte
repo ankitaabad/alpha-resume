@@ -1,6 +1,6 @@
 <script>
 	import { get_resume_index, preview_data, profile_store, resume_id } from '$lib/store';
-	import { get_social_icon, ae } from '$lib/utils';
+	import { get_social_icon, ae, generate_url } from '$lib/utils';
 	import { get } from 'svelte/store';
 	let avatar;
 	let network;
@@ -55,7 +55,7 @@
 								this={get_social_icon(socialProfile.Network)}
 								class="inline text-gray-500"
 							/>
-							<a href="\\{socialProfile.URL}" class="text-gray-500">{socialProfile.Username}</a>
+							<a href="{generate_url(socialProfile.URL)}" class="text-gray-500">{socialProfile.Username}</a>
 						</p>
 					{/each}
 				</div>

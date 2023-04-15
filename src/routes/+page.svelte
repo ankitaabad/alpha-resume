@@ -27,24 +27,24 @@
 				<div
 					class="w-8/12 h-full border-r border-solid border-gray-300 max-h-[91vh] overflow-auto relative"
 				>
-					<div class="h-full flex justify-center items-center">
-						<div class="flex flex-col items-center justify-center">
-							<img
-								{src}
-								alt="welcome"
-								width="400"
-								class="rounded-3xl border border-solid border-gray-300"
-							/>
+						<div class="h-full flex justify-center items-center">
+							<div class="flex flex-col items-center justify-center">
+								<img
+									{src}
+									alt="welcome"
+									width="400"
+									class="rounded-3xl border border-solid border-gray-300"
+								/>
 							<div class="mt-6">
-								<a
-									on:click={() => open(Popup)}
-									class="bg-blue-700 hover:bg-blue-600 text-white px-8 py-3 rounded-md flex items-center gap-2 cursor-pointer w-fit"
-								>
-									Create New Resume
-								</a>
+									<a
+										on:click={() => open(Popup)}
+										class="bg-blue-700 hover:bg-blue-600 text-white px-8 py-3 rounded-md flex items-center gap-2 cursor-pointer w-fit"
+									>
+										Create New Resume
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
 					<div
 						class="flex items-center justify-between w-full sticky top-0 left-0 px-8 pt-8 pb-6 bg-gray-100"
 					>
@@ -100,7 +100,7 @@
 						<iframe
 							width="100%"
 							height="248"
-							src="https://www.youtube.com/embed/uC2NmfzD2ec"
+							src="https://www.youtube.com/embed/uackmck_TBk?modestbranding=1&;showinfo=0&;autohide=1&;rel=0;"
 							title="YouTube video player"
 							frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -109,11 +109,10 @@
 					</div>
 					<h2 class="text-xl font-semibold text-gray-900 mt-14 mb-4">Features</h2>
 					<ul class="flex flex-col gap-2 list-disc pl-4">
-						<li>Completely Free</li>
-						<li>No Hidden Fees</li>
-						<li>Live Content Feedback</li>
-						<li>ATS-Friendly</li>
-						<li>Edit Your Resume in Real Time</li>
+						<li>No Sign In Required</li>
+						<li>Forever Free</li>
+						<li>Privacy First</li>
+
 						<li>Creative and Professional Resume Templates</li>
 					</ul>
 				</div>

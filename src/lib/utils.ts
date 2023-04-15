@@ -79,9 +79,9 @@ const get_blank_education = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
+			degree: cf('Degree'),
 			institution: cf('Institution'),
 			//area: cf('Area of Study'),
-			degree: cf('Degree'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			grade: cf('Grade'),
@@ -97,8 +97,8 @@ const get_blank_experience = () => {
 	return {
 		id: get_unique_id(),
 		fields: {
-			cname: cf('Company Name'),
 			job_title: cf('Job Title'),
+			cname: cf('Company Name'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			url: cf('URL'),
@@ -125,7 +125,6 @@ const get_blank_project = () => {
 		id: get_unique_id(),
 		fields: {
 			name: cf('Name'),
-			description: cf('Description'),
 			start_date: cf('Start Date'),
 			end_date: cf('End Date'),
 			url: cf('URL'),
@@ -309,6 +308,12 @@ export const is_value_in_arr = (items: any[]) => {
 		return is_value_in_obj(item);
 	});
 };
+export const generate_url = (url:string) => {
+  if(url.startsWith("http")){
+    return url
+  } 
+  return `https://${url}`
+}
 
 export const is_value_in_obj = (obj: Record<string,any>) => {
 	for (const key in obj) {
