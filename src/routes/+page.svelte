@@ -27,6 +27,7 @@
 				<div
 					class="w-8/12 h-full border-r border-solid border-gray-300 max-h-[91vh] overflow-auto relative"
 				>
+        {#if $store.length === 0}
 						<div class="h-full flex justify-center items-center">
 							<div class="flex flex-col items-center justify-center">
 								<img
@@ -45,20 +46,19 @@
 								</div>
 							</div>
 						</div>
+          {:else}
 					<div
 						class="flex items-center justify-between w-full sticky top-0 left-0 px-8 pt-8 pb-6 bg-gray-100"
 					>
 						<h1 class="text-2xl font-semibold text-gray-900">My Resume</h1>
-
-						<Modal show={$add_new_modal}>
-							<a
-								on:click={() => open(Popup)}
-								class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
-							>
-								<Fa icon={faAdd} class="text-white " />
-								Add New
-							</a>
-						</Modal>
+            <a
+            on:click={() => open(Popup)}
+            class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
+          >
+            <Fa icon={faAdd} class="text-white " />
+            Add New
+          </a>
+					
 					</div>
 					<div class="grid grid-cols-2 gap-8 px-8 pb-8 lg:grid-cols-3 ">
 						{#each $store as { name, id }}
@@ -93,6 +93,7 @@
 							</div>
 						{/each}
 					</div>
+          {/if}
 				</div>
 				<div class="w-4/12 flex-1 h-full bg-white p-8">
 					<h2 class="text-xl font-semibold text-gray-900 mb-4">Build Your Resume Fast and Easy.</h2>
@@ -120,3 +121,6 @@
 		</div>
 	</div>
 </div>
+<Modal show={$add_new_modal}>
+							
+</Modal>
