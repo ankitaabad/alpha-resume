@@ -9,16 +9,16 @@
 		<div class="mb-3 flex flex-col gap-2 w-full">
 			<div class="flex justify-between">
 				<div>
-					<div class="font-medium">{edu.Institution}</div>
-					<span class="text-gray-500 text-sm">{edu.Area}</span>
+					<div class="font-medium">{edu.Degree}</div>
+					<span class="text-gray-500 text-sm">{edu.Institution} </span>
 				</div>
 				<div class="text-sm flex flex-col gap-1">
+					<div class="text-gray-700  flex justify-end font-medium">{edu.Grade}</div>
 					<div>
 						<span class="text-gray-500 text-xs">{edu['Start Date']}</span>&nbsp;-&nbsp;<span
 							class="text-gray-500 text-xs">{edu['End Date']}</span
 						>
 					</div>
-					<div class="text-gray-700 text-xs flex justify-end">{edu.Grade}</div>
 				</div>
 			</div>
 

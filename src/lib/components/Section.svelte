@@ -5,7 +5,7 @@
 	import { get_resume } from '$lib/store';
 	import type { Section } from '$lib/utils';
 	export let section_index: number;
-	$: console.log({ section_index });
+
 	// import { quill } from 'svelte-quill';
 	import ProfilePicture from './ProfilePicture.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
@@ -29,10 +29,10 @@
 	let src = './default-pp.svg';
 
 	let resume = get_resume();
-	console.log({ resume });
+
 	$: section = resume.sections[section_index];
 	$: section_name = section.name;
-	console.log({ section_name });
+
 	let resume_index = get_resume_index();
 </script>
 
@@ -71,11 +71,11 @@
 								>
 									<ArrowDown class=" text-gray-700   text-2xl" /></button
 								>
-								<button
+								<!-- <button
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200  transition active:bg-gray-400"
 								>
 									<Eye class=" text-gray-700  text-xl" /></button
-								>
+								> -->
 								<button
 									on:click={() => store.remove_section_item(section.id, id)}
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200 transition  active:bg-gray-400"

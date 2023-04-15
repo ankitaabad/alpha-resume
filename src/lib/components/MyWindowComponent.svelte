@@ -73,7 +73,7 @@
 				class="px-4   py-2 bg-slate-200 hover:bg-slate-300 rounded-md shadow-sm"
 				on:click={async () => {
 					avatar = await getCroppedImg(image, pixelCrop);
-					console.log('avatar type', typeof avatar);
+
 					// var profileImage=document.getElementById("pp")
 					// var profileImageDiv=document.getElementById("imagediv")
 					// if(crop_shape=="rect"){

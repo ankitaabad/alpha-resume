@@ -28,7 +28,6 @@
 			} else if (pressedKey === 'p') {
 				index = (len + index - 1) % len;
 			}
-			console.log({ index });
 		};
 	});
 	let index = 0;
@@ -49,10 +48,9 @@
 							icon={get_icon_from_section_type(section.type)}
 							class="focus:text-blue-700 text-sm text-gray-700 self-center "
 						/> -->
-            <div class="text-xl">
-
-              <svelte:component this = {get_social_icon(section.type.toLowerCase())}/>
-            </div>
+						<div class="text-xl">
+							<svelte:component this={get_social_icon(section.type.toLowerCase())} />
+						</div>
 
 						<div class=" ">{section.name}</div></a
 					>

@@ -1,5 +1,5 @@
 <script>
-	import { imageCropWindowDisplay,profile_store } from '$lib/store';
+	import { imageCropWindowDisplay, profile_store } from '$lib/store';
 	import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	let src = './default-pp.svg';
@@ -7,14 +7,12 @@
 	let image;
 	import MyWindowComponent from './MyWindowComponent.svelte';
 	const onFileSelected = (e) => {
-		console.log('File selected');
 		let image1 = e.target.files[0];
 
 		let reader = new FileReader();
 		reader.onload = (e) => {
 			image = e.target.result;
 			$imageCropWindowDisplay = true;
-			console.log({ 'image crop window': $imageCropWindowDisplay });
 		};
 		reader.readAsDataURL(image1);
 	};
@@ -46,9 +44,12 @@
 	/>
 </div>
 <div class="flex w-5/12">
-	<button class="bg-blue-700 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600" 
-	on:click={async () => {
-		profile_store.addImage({ image: undefined});
-	}}>
-	Reset Profile Picture</button>
+	<button
+		class="px-8 bg-blue-700 text-white rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-blue-600"
+		on:click={async () => {
+			profile_store.addImage({ image: undefined });
+		}}
+	>
+		Reset
+	</button>
 </div>

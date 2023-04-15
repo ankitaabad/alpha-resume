@@ -13,7 +13,7 @@
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Popup from '$lib/components/Popup.svelte';
 	import CustomPill from '$lib/components/CustomPill.svelte';
-	let src = './pattern.svg';
+	let src = './welcome.svg';
 </script>
 
 <!-- <CustomPill></CustomPill> -->
@@ -27,10 +27,29 @@
 				<div
 					class="w-8/12 h-full border-r border-solid border-gray-300 max-h-[91vh] overflow-auto relative"
 				>
+					<div class="h-full flex justify-center items-center">
+						<div class="flex flex-col items-center justify-center">
+							<img
+								{src}
+								alt="welcome"
+								width="400"
+								class="rounded-3xl border border-solid border-gray-300"
+							/>
+							<div class="mt-6">
+								<a
+									on:click={() => open(Popup)}
+									class="bg-blue-700 hover:bg-blue-600 text-white px-8 py-3 rounded-md flex items-center gap-2 cursor-pointer w-fit"
+								>
+									Create New Resume
+								</a>
+							</div>
+						</div>
+					</div>
 					<div
 						class="flex items-center justify-between w-full sticky top-0 left-0 px-8 pt-8 pb-6 bg-gray-100"
 					>
 						<h1 class="text-2xl font-semibold text-gray-900">My Resume</h1>
+
 						<Modal show={$add_new_modal}>
 							<a
 								on:click={() => open(Popup)}

@@ -19,17 +19,16 @@
 
 	import Download from 'svelte-material-icons/Download.svelte';
 	const import_file_selected = (e) => {
-		console.log('File selected');
 		let resume_data = e.target.files[0];
 
 		let reader = new FileReader();
 		reader.onload = (e) => {
 			const data = e.target.result;
-			console.log({ data });
+
 			const { all_resume_data, all_images_data } = JSON.parse(data);
-			console.log({ all_images_data });
+
 			const combined_resume = get_all_resume_arr();
-			console.log({ combined_resume });
+
 			combined_resume.push(...all_resume_data);
 			$store = combined_resume;
 
@@ -40,7 +39,6 @@
 		reader.readAsText(resume_data);
 	};
 	const exportData = () => {
-		console.log('exporting data');
 		const all_resume = get_all_resume_arr();
 		const all_images = $profile_store;
 		const text = JSON.stringify({
@@ -94,10 +92,13 @@
 	</div> -->
 	<div class="logo flex items-center gap-2 ">
 		<!-- <img {src} alt="Logo" /> -->
-		<a href="/">
-			<Fa icon={faHome} class="pr-2" />
-		</a>
-		<div>EZ-Resume</div>
+		{#if !isHome()}<a href="/">
+				<Fa icon={faHome} class="pr-2 text-lg" />
+			</a>
+		{/if}
+		<div>
+			<a href="/"><img {src} alt="EZ Resume" width="124" /></a>
+		</div>
 	</div>
 
 	<div class="grow" />
