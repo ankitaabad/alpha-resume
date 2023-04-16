@@ -1,0 +1,40 @@
+<speak><prosody rate="90%">
+
+
+Welcome to Easy-résumé, In this video I will show you how you can craft a compelling résumé with Easy-résumé.  Lets start.
+Go to easyrésumé.compile7.org.
+click on create new résumé. Enter the name of your résumé. click on create résumé. 
+You have 3 sections here. 
+First one to navigate between the sections. second one to add your details and third one to check preview. 
+Let us fill in some details.
+In the basic section click on profile picture icon to upload photo.
+select Your profile photo.
+You can choose a round or a rectangle shape for your photo.
+You can zoom and crop your profile pic as well.
+let me add some basic details. 
+Live preview is generated as you add details.
+Now lets move to social profile section. you can add your social profiles like linkedin, youtube etc. .
+click on up down arrow keys to change the order of your profiles. 
+click on delete button to remove an item.
+Let me quickly fill in other details.
+You add optional URLs to add links in résumé.
+
+You can change the font from here.
+You can also change the name of your résumé from here.
+
+Click on the download button to download the résumé.
+Lets open our résumé.
+Let us check how the links work.
+click on linkedin profile link and it opens the linkedin profile page.
+All the links work as you expect them to work.
+
+
+
+Return to home page, here all your résumé will be listed.
+we don't store any of your data in server. All data is local to your browser. You can export it and import to different browser. let me show you how.
+click on export button and it will export all your résumé in a txt file.
+
+Lets open firefox to import our data there. 
+click on import and select the exported file. click on edit to edit your imported résumé. that is it.
+I hope you will like the simplicity and elegance of easy résumé. A lot of new features will be added very soon, stay tuned.
+</prosody></speak>

@@ -1,29 +1,37 @@
 // replace resume with résumé for pronunciation accuracy
 Craft a compelling resume with Easy-Resume. 
 Go to easyresume.compile7.org.
-click on create resume. Enter the name of your resume. Press enter. 
+click on create new resume. Enter the name of your resume. click on create resume. 
 You have 3 sections here. 
 First one to navigate between the sections. second one to add your details and third one to check preview. 
-Let us fill in some details. You can check the generated preview.
-In the basic section click on profile photo to upload photo.
+Let us fill in some details.
+In the basic section click on profile picture icon to upload photo.
 select Your profile photo.
 You can choose a round or a rectangle shape for your photo.
-let me add some basic details.
-Now lets move to social profiles. Let us add linkedin profile to our resume.
-Now let us add experience section. Here you can add multiple sections, change their order and delete them if required.
+You can zoom and crop your profile pic as well.
+let me add some basic details. 
+Live preview is generated as you add details.
+Now lets move to social profile section. you can add your social profiles like linkedin, youtube etc.
+click on up down arrow keys to change the order of your profiles. 
+click on delete button to remove an item.
+Let me quickly fill in other details.
+You add optional urls to add links in resume.
 
-Let me quickly add other details.
+You can change the font from here.
+You can also change the name of your resume from here.
+
+Click on the download button to download the resume.
+Lets open our resume.
+Let us check how the links works.
+click on linkedin profile link and it opens the linkedin profile page.
+All the links work as you expect them to work.
 
 
-Change font
 
-change name of the resume
+Return to home page, here all your resume will be listed.
+we don't store any of your data in server. All data is local to your browser. You can export it and import to different browser. let me show you how.
+click on export button and it will export all your resume in a txt file.
 
-Downloaded resume, and You quickly get a perfectly laid out resume.
-Now let me show how the links work in your resume.
-lets up open it in our phone.
-If you click on linkedin profile it opens
-
-
-return to home page, here all your resume will be listed.
-we don't store any of your data in server. All data is local to your browser. You can export it and import to different browser. let me show you how. so Import export
+Lets open firefox to import our data there. 
+click on import and select the exoprted file. click on edit to edit your imported resume.
+I hope you will like the simplicity and elegance of easy resume. A lot of new features will be added very soon stay tuned. bbye
