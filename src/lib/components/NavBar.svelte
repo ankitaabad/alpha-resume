@@ -1,5 +1,12 @@
 <script>
-	import { download, get_all_resume_arr, get_profile, profile_store, store } from '$lib/store';
+	import {
+		aboutus,
+		download,
+		get_all_resume_arr,
+		get_profile,
+		profile_store,
+		store,
+	} from '$lib/store';
 	import {
 		faUserNinja,
 		faSignIn,
@@ -18,6 +25,7 @@
 	import { page } from '$app/stores';
 
 	import Download from 'svelte-material-icons/Download.svelte';
+	import AboutUs from './AboutUs.svelte';
 	const import_file_selected = (e) => {
 		let resume_data = e.target.files[0];
 
@@ -51,7 +59,7 @@
 
 		element.style.display = 'none';
 		document.body.appendChild(element);
-    element.download = 'EZResume.txt'
+		element.download = 'EZResume.txt';
 		element.click();
 
 		document.body.removeChild(element);
@@ -92,7 +100,8 @@
 	</div> -->
 	<div class="logo flex items-center gap-2 ">
 		<!-- <img {src} alt="Logo" /> -->
-		{#if !isHome()}<a href="/">
+		{#if !isHome()}
+			<a href="/" on:click={() => ($aboutus = false)}>
 				<Fa icon={faHome} class="pr-2 text-lg" />
 			</a>
 		{/if}
@@ -105,6 +114,12 @@
 
 	<div class="h-full flex items-center gap-2">
 		{#if isHome()}
+			{#if !$aboutus}
+				<button
+					class="mr-6 hover:text-blue-700 transition focus:text-blue-700 font-medium"
+					on:click={() => ($aboutus = !$aboutus)}>About us</button
+				>
+			{/if}
 			{#each navButtons as { text, icon, on_click }}
 				<button
 					class="bg-gray-100 py-1 px-4 rounded-md h-10 flex items-center gap-2 font-normal transition hover:bg-gray-50"
