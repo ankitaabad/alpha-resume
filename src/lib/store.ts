@@ -128,6 +128,26 @@ function create_all_resume() {
 			return ar;
 		});
 	};
+
+	const update_theme = (theme: string) => {
+		update((ar) => {
+			const rid = get(resume_id);
+			const resume = get_resume();
+			resume.settings.theme = theme;
+			ar[rid] = resume;
+			return ar;
+		});
+	};
+  const update_template = (template: string) => {
+		update((ar) => {
+			const rid = get(resume_id);
+			const resume = get_resume();
+			resume.settings.template = template;
+			ar[rid] = resume;
+			return ar;
+		});
+	};
+
 	const get_item_index = (section_id, item_id) => {
 		const resume = get_resume();
 		const section = resume.sections.find((section) => section.id === section_id) as Section<any>;
@@ -169,6 +189,8 @@ function create_all_resume() {
 		edit_resume,
 		update_font,
 		get_item_index,
+		update_theme,
+    update_template
 	};
 }
 
@@ -192,6 +214,17 @@ export const font = derived([store, resume_id], ([$store, $resume_id]) => {
 	const resume = $store.find((resume) => resume.id === $resume_id);
 	return resume?.settings.font;
 });
+
+export const theme = derived([store, resume_id], ([$store, $resume_id]) => {
+	const resume = $store.find((resume) => resume.id === $resume_id);
+
+	return resume?.settings.theme;
+});
+export const template = derived([store, resume_id], ([$store, $resume_id]) => {
+	const resume = $store.find((resume) => resume.id === $resume_id);
+	return resume?.settings.template;
+});
+
 export const preview_data = derived(
 	[store, resume_id, profile_store],
 	([$store, $resume_id, $profile_store]) => {
@@ -230,7 +263,7 @@ export const get_resume_index = () => {
 export function download() {
 	const element = document.getElementById('preview');
 	element.style.fontFamily = get(font) || 'Inter';
-	html2pdf(element, { html2canvas: { scale: 2 },filename: `${get_resume().name}.pdf` });
+	html2pdf(element, { html2canvas: { scale: 2 }, filename: `${get_resume().name}.pdf` });
 }
 
 export const get_resume = () => {

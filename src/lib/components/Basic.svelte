@@ -1,7 +1,8 @@
 <script>
-	import { get_resume_index, preview_data, profile_store, resume_id } from '$lib/store';
-	import { get_social_icon, ae, generate_url } from '$lib/utils';
+	import {  get_resume_index, preview_data, profile_store, resume_id, theme } from '$lib/store';
+	import { get_social_icon, ae, generate_url, themes, } from '$lib/utils';
 	import { get } from 'svelte/store';
+	import Header from './Header.svelte';
 	let avatar;
 	let network;
 	profile_store.subscribe((value) => {
@@ -24,7 +25,7 @@
 		</div>
 		<div class="profile-details w-full flex justify-between">
 			<div>
-				<h1 class="text-2xl font-semibold ">{basic_data?.Name}</h1>
+				<h1 class="text-2xl font-semibold " style="color:{themes[$theme]?.header}">{basic_data?.Name}</h1>
 				<div class=" mb-4 text-gray-500" class:hidden={basic_data?.Designation === ''}>
 					{basic_data?.Designation}
 				</div>
@@ -54,6 +55,8 @@
 							<svelte:component
 								this={get_social_icon(socialProfile.Network)}
 								class="inline text-gray-500"
+         
+                
 							/>
 							<a href="{generate_url(socialProfile.URL)}" class="text-gray-500">{socialProfile.Username}</a>
 						</p>
@@ -67,10 +70,9 @@
 	<div class="flex flex-col" class:hidden={ae(basic_data?.Summary)}>
 		<!-- profile -->
 		<div class={basic_data?.Summary ? 'profile pb-5 ' : ''}>
-			<h2 class="text-xl font-semibold">About Me</h2>
-			<div class="mb-2  border-b border-solid border-gray-300" />
-			<p class="text-gray-500 text-justify">
-				{basic_data?.Summary}
+		  <Header title="About Me"/>
+			<p class="text-gray-500 text-justify summary">
+				{@html basic_data?.Summary}
 			</p>
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { faTrash, faAdd } from '@fortawesome/free-solid-svg-icons';
+	import Editor from '@tinymce/tinymce-svelte';
 	import Fa from 'svelte-fa';
 	import { get_resume_index, store } from '$lib/store';
 	import { get_resume } from '$lib/store';
@@ -32,8 +33,15 @@
 
 	$: section = resume.sections[section_index];
 	$: section_name = section.name;
-
 	let resume_index = get_resume_index();
+	let conf = {
+		plugins: ['lists', 'link'],
+		toolbar: 'undo redo | bold italic  | numlist bullist | link',
+		menubar: false,
+		branding: false,
+		toolbar_mode: 'sliding',
+		elementpath: false,
+	};
 </script>
 
 <div>
@@ -43,7 +51,7 @@
 		</h2> -->
 		<!-- p-5 bg-white  rounded-lg border-solid border border-gray-300 -->
 		<div class="flex flex-col gap-4">
-			{#each $store[resume_index].sections[section_index].items as { fields, id },index}
+			{#each $store[resume_index].sections[section_index].items as { fields, id }, index}
 				<div class="bg-white rounded-lg border-solid border border-gray-300">
 					<div
 						class="bg-gray-100 rounded-t-lg flex justify-between items-center border-solid border-b border-gray-300 pl-5 pr-2 h-12 gap-1"
@@ -57,7 +65,9 @@
 									class:bg-gray-200={store.get_item_index(section.id, id) == 0}
 									disabled={store.get_item_index(section.id, id) == 0}
 								>
-									<ArrowUp class= " text-2xl {index ===0?'text-gray-300':'text-gray-700'}" /></button
+									<ArrowUp
+										class=" text-2xl {index === 0 ? 'text-gray-300' : 'text-gray-700'}"
+									/></button
 								>
 
 								<button
@@ -67,7 +77,12 @@
 										section.items.length - 1}
 									disabled={store.get_item_index(section.id, id) == section.items.length - 1}
 								>
-									<ArrowDown class=" text-2xl {index === $store[resume_index].sections[section_index].items.length -1?'text-gray-300':'text-gray-700'}" /></button
+									<ArrowDown
+										class=" text-2xl {index ===
+										$store[resume_index].sections[section_index].items.length - 1
+											? 'text-gray-300'
+											: 'text-gray-700'}"
+									/></button
 								>
 								<!-- <button
 									class="flex justify-center items-center rounded-full  h-10 w-10 hover:bg-gray-200  transition active:bg-gray-400"
@@ -105,14 +120,16 @@
 							{:else if field.type === 'textarea'}
 								<div class="form-group flex flex-col gap-1 mb-4">
 									<label for="" class="text-sm text-gray-700">Summary</label>
-									<textarea
-										id=""
-										cols="15"
-										rows="4"
-										class="py-2 px-4 rounded-md border border-solid border-gray-400 text-sm"
-										placeholder={field.label}
+									<Editor
+										apiKey="nhn5qlab73tbwwoc8n4kcuuhgbawwa0nbqfc85m3w5jqi36a"
+										{conf}
 										bind:value={field.value}
 										on:keyup={() => (fields = fields)}
+										on:click={() => (fields = fields)}
+										on:blur={() => (fields = fields)}
+										on:keypress={() => (fields = fields)}
+										on:change={() => (fields = fields)}
+										on:nodechange={() => (fields = fields)}
 									/>
 								</div>
 							{:else if field.type === 'dropdown'}
@@ -129,8 +146,8 @@
 										<option value="linkedin">LinkedIn</option>
 										<option value="google">Google</option>
 										<option value="facebook">Facebook</option>
-                    <option value ="twitter">Twitter</option>
-                    <option value ="youtube">Youtube</option>
+										<option value="twitter">Twitter</option>
+										<option value="youtube">Youtube</option>
 									</select>
 								</div>
 								<!-- <div class="form-group flex flex-col gap-1 mb-4">

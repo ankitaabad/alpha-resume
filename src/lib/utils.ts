@@ -204,12 +204,40 @@ const get_min_data = (name: string, max = 'Many') => {
 		max,
 	};
 };
+
+export const templates = ["Classic","Modern" ]
+export const themes = {
+	"Classic": {
+		content: '#454545',
+		header: '#FF6000',
+		subheader: '#7B8FA1',
+		pills: '#FFA559',
+    link: '#FF6000'
+	},
+  "Elegant": {
+    content:"#454545",
+    header:"#EA5455",
+    subheader: "#002B5B",
+    pills: "#576CBC",
+    link: "#EA5455"
+  },
+  "Modern" :{
+    content : "#454545",
+    header: "#19456B",
+    subheader: "#11698E",
+    pills: "#16C79A",
+    link: "#19456B"
+  }
+
+};
 export const get_blank_resume = (resume_name) => {
 	return {
 		id: get_unique_id(),
 		name: resume_name || 'untitled',
 		settings: {
 			font: 'inter',
+			theme: 'Hyper Orange',
+      template: 'Classic'
 		},
 		sections: [
 			{ ...get_min_data('Basic', 'One'), items: [get_blank_basic()] },
@@ -294,8 +322,8 @@ export const get_social_icon = (name: keyof typeof social_icon) => {
  * any value is empty then it returns true
  */
 export const empty = (value) => {
-  return !(value && value !=="")
-}
+	return !(value && value !== '');
+};
 export const ae = (...values) => {
 	console.log('ae called', values);
 	return !values.reduce((prev, next) => {
@@ -303,19 +331,19 @@ export const ae = (...values) => {
 	}, true);
 };
 export const is_value_in_arr = (items: any[]) => {
-  console.log({items_in_arr: items})
+	console.log({ items_in_arr: items });
 	return items.some((item) => {
 		return is_value_in_obj(item);
 	});
 };
-export const generate_url = (url:string) => {
-  if(url.startsWith("http")){
-    return url
-  } 
-  return `https://${url}`
-}
+export const generate_url = (url: string) => {
+	if (url.startsWith('http')) {
+		return url;
+	}
+	return `https://${url}`;
+};
 
-export const is_value_in_obj = (obj: Record<string,any>) => {
+export const is_value_in_obj = (obj: Record<string, any>) => {
 	for (const key in obj) {
 		if (!empty(obj[key])) {
 			return true;

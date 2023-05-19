@@ -1,14 +1,15 @@
 <script>
 	import { preview_data } from '$lib/store';
 	import { is_value_in_arr } from '$lib/utils';
+	import Header from './Header.svelte';
 	import HyphenDate from './HyphenDate.svelte';
 	import Hyphen from './HyphenDate.svelte';
 	import LinkItem from './LinkItem.svelte';
 </script>
 
 <div class:hidden={!is_value_in_arr($preview_data.Projects.data)}>
-	<h2 class="text-xl font-semibold ">Projects</h2>
-	<div class="mb-2  border-b border-solid border-gray-300" />
+  <Header title="Projects"/>
+
 	<div class="mb-7">
 		{#each $preview_data.Projects.data as pro, index}
 			<div class="mb-3 flex flex-col gap-2 w-full">
@@ -23,8 +24,8 @@
 				</div>
 
 				<div class="flex flex-col gap-2">
-					<p class="text-gray-500 text-justify">
-						{pro.Summary}
+					<p class="text-gray-500 text-justify summary">
+						{@html pro.Summary}
 					</p>
 					
 				</div>
