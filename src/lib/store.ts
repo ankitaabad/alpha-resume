@@ -3,6 +3,7 @@ import { goto } from '$app/navigation';
 import { derived, get, writable } from 'svelte/store';
 import { get_blank_resume, get_blank_section_item, type Resume, type Section } from './utils';
 export const resume_id = writable(0);
+export const aboutus = writable(false);
 export const add_new_modal = writable(null);
 export type Profile = {
 	image: string;

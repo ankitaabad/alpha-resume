@@ -14,8 +14,7 @@
 </script>
 
 <div>
-	<!-- <h1 class="text-2xl font-semibold ">{$preview_data?.['Social Profile']?.data[0]?.Network}</h1> -->
-
+	<!-- ----------------- -->
 	<div class={basic_data.Name ? 'flex pb-7 gap-6 ' : 'flex'}>
 		<div
 			class="aspect-square w-28 h-28 bg-transparent flex items-center justify-center"
@@ -58,7 +57,9 @@
          
                 
 							/>
-							<a href="{generate_url(socialProfile.URL)}" class="text-gray-500">{socialProfile.Username}</a>
+							<a href={generate_url(socialProfile.URL)} class="text-gray-500"
+								>{socialProfile.Username}</a
+							>
 						</p>
 					{/each}
 				</div>
