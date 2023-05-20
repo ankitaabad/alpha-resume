@@ -14,7 +14,7 @@
 			<div class="mb-3 flex flex-col gap-2 w-full">
 				<div class="flex justify-between">
 					<div>
-						<div class="font-medium" style = "color: {themes[$theme].subheader}">
+						<div class="font-medium" style = "color: {themes[$theme]?.subheader}">
 							{exp['Job Title']}
 						</div>
 						<div>

@@ -15,7 +15,7 @@
 			<div class="mb-3 flex flex-col gap-2 w-full" >
 				<div class="flex justify-between">
 					<div>
-						<div class="font-medium" style = "color:{themes[$theme].subheader}">{edu.Degree}</div>
+						<div class="font-medium" style = "color:{themes[$theme]?.subheader}">{edu.Degree}</div>
             <LinkItem value={edu.Institution} url={edu.URL} subheader={true}/>
 					</div>
 					<div class="text-sm flex flex-col gap-1" >

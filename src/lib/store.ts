@@ -218,7 +218,7 @@ export const font = derived([store, resume_id], ([$store, $resume_id]) => {
 
 export const theme = derived([store, resume_id], ([$store, $resume_id]) => {
 	const resume = $store.find((resume) => resume.id === $resume_id);
-
+  console.log({"found_theme":resume?.settings?.theme})
 	return resume?.settings?.theme || "Classic";
 });
 export const template = derived([store, resume_id], ([$store, $resume_id]) => {
