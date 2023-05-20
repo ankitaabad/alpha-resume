@@ -219,11 +219,11 @@ export const font = derived([store, resume_id], ([$store, $resume_id]) => {
 export const theme = derived([store, resume_id], ([$store, $resume_id]) => {
 	const resume = $store.find((resume) => resume.id === $resume_id);
 
-	return resume?.settings.theme;
+	return resume?.settings?.theme || "Classic";
 });
 export const template = derived([store, resume_id], ([$store, $resume_id]) => {
 	const resume = $store.find((resume) => resume.id === $resume_id);
-	return resume?.settings.template;
+	return resume?.settings.template || "Classic";
 });
 
 export const preview_data = derived(

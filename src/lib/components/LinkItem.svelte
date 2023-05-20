@@ -5,7 +5,7 @@
   export let value="";
   export let url="";
   export let subheader = false
-  $: text_color = subheader ? themes[$theme].content : themes[$theme].subheader
+  $: text_color = subheader ? themes[$theme]?.content : themes[$theme]?.subheader
   $: text_size = subheader ? 'font-sm': 'font-medium'
   $: console.log({url})
 </script>

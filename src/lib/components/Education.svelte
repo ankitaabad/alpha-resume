@@ -19,7 +19,7 @@
             <LinkItem value={edu.Institution} url={edu.URL} subheader={true}/>
 					</div>
 					<div class="text-sm flex flex-col gap-1" >
-						<div class="  flex justify-end font-medium" style = "color:{themes[$theme].content}">{edu.Grade}</div>
+						<div class="  flex justify-end font-medium" style = "color:{themes[$theme]?.content}">{edu.Grade}</div>
 						<div>
               <HyphenDate
 							date_obj = {edu}
