@@ -5,6 +5,9 @@
 html {
     font-family: "Inter", sans-serif;
     scroll-behavior: smooth;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 .rb-button:hover svg path {
     fill: white;
@@ -19,11 +22,11 @@ html {
         radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
     background-blend-mode: color-dodge, overlay, difference, normal;
 }
-.summary  a::after {
-  content: ' \f08e ';
-  font: var(--fa-font-solid);
+.summary a::after {
+    content: " \f08e ";
+    font: var(--fa-font-solid);
 }
 
 .summary ul li::before {
-  content: ""
+    content: "";
 }

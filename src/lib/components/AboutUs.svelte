@@ -99,7 +99,13 @@
 			<div>
 				<ul class="flex gap-3">
 					<li>
-						<a href="#" class="block" title="Linkedin" rel="noreferrer" target="_blank">
+						<a
+							href="https://www.linkedin.com/in/gargarpita4"
+							class="block"
+							title="Linkedin"
+							rel="noreferrer"
+							target="_blank"
+						>
 							<Linkedin class="text-xl text-gray-500 hover:text-blue-700 transition" />
 						</a>
 					</li>
@@ -109,7 +115,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="" title="Github" rel="noreferrer" target="_blank">
+						<a
+							href="https://github.com/Arpita1311-cts"
+							class=""
+							title="Github"
+							rel="noreferrer"
+							target="_blank"
+						>
 							<Github class="text-xl text-gray-500 hover:text-blue-700 transition" />
 						</a>
 					</li>

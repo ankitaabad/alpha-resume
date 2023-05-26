@@ -42,19 +42,19 @@
 		currentFont = font;
 		hideFontSelectBox = true;
 	};
-  onMount(() => {
-    console.log("Preview mounted")
-    let elements = document.querySelectorAll(".pb")
-    for (let i of elements) {
-      console.log({clientHeight: i})
-    }
-  })
+	onMount(() => {
+		console.log('Preview mounted');
+		let elements = document.querySelectorAll('.pb');
+		for (let i of elements) {
+			console.log({ clientHeight: i });
+		}
+	});
 	const select_theme = (theme) => {
 		store.update_theme(theme);
 	};
-  const select_template = (template) => {
-    store.update_template(template)
-  }
+	const select_template = (template) => {
+		store.update_template(template);
+	};
 	let editing_name = false;
 	const start_editing = async () => {
 		editing_name = true;
@@ -108,151 +108,153 @@
 				</button>
 			</div>
 		{/if}
-<div class="grow"></div>
-		<div class="relative flex ">
-			<div class="">
-				<button
-					type="button"
-					class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-					id="menu-button"
-					aria-expanded="true"
-					aria-haspopup="true"
-					use:clickOutside
-					on:outclick={() => (hideFontSelectBox = true)}
-					on:click={() => (hideFontSelectBox ^= true)}
-				>
-					Font ({currentFont})
-					<svg
-						class="-mr-1 h-5 w-5 text-gray-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						aria-hidden="true"
+		<div class="grow" />
+		<div class="flex gap-4">
+			<div class="relative flex ">
+				<div class="">
+					<button
+						type="button"
+						class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+						id="menu-button"
+						aria-expanded="true"
+						aria-haspopup="true"
+						use:clickOutside
+						on:outclick={() => (hideFontSelectBox = true)}
+						on:click={() => (hideFontSelectBox ^= true)}
 					>
-						<path
-							fill-rule="evenodd"
-							d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</button>
-			</div>
-			<div
-				class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-				class:hidden={hideFontSelectBox}
-				role="menu"
-				aria-orientation="vertical"
-				aria-labelledby="menu-button"
-				tabindex="-1"
-			>
-				<div class="py-1" role="none">
-					{#each fonts as font}
-						<button
-							on:click={() => selectFont(font)}
-							class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
-							class:bg-blue-100={font === currentFont}
-							role="menuitem"
-							tabindex="-1"
-							id="menu-item-0">{font}</button
+						Font ({currentFont})
+						<svg
+							class="-mr-1 h-5 w-5 text-gray-400"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
 						>
-					{/each}
+							<path
+								fill-rule="evenodd"
+								d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div
+					class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class:hidden={hideFontSelectBox}
+					role="menu"
+					aria-orientation="vertical"
+					aria-labelledby="menu-button"
+					tabindex="-1"
+				>
+					<div class="py-1" role="none">
+						{#each fonts as font}
+							<button
+								on:click={() => selectFont(font)}
+								class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
+								class:bg-blue-100={font === currentFont}
+								role="menuitem"
+								tabindex="-1"
+								id="menu-item-0">{font}</button
+							>
+						{/each}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="relative flex  ">
-			<div class="">
-				<button
-					type="button"
-					class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-					id="menu-button"
-					aria-expanded="true"
-					aria-haspopup="true"
-					use:clickOutside
-					on:outclick={() => (hideColorSelectBox = true)}
-					on:click={() => (hideColorSelectBox ^= true)}
-				>
-					Theme ({$theme})
-					<svg
-						class="-mr-1 h-5 w-5 text-gray-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						aria-hidden="true"
+			<div class="relative flex  ">
+				<div class="">
+					<button
+						type="button"
+						class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+						id="menu-button"
+						aria-expanded="true"
+						aria-haspopup="true"
+						use:clickOutside
+						on:outclick={() => (hideColorSelectBox = true)}
+						on:click={() => (hideColorSelectBox ^= true)}
 					>
-						<path
-							fill-rule="evenodd"
-							d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</button>
-			</div>
-			<div
-				class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-				class:hidden={hideColorSelectBox}
-				role="menu"
-				aria-orientation="vertical"
-				aria-labelledby="menu-button"
-				tabindex="-1"
-			>
-				<div class="py-1" role="none">
-					{#each Object.keys(themes) as themeKey}
-						<button
-							on:click={() => select_theme(themeKey)}
-							class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
-							class:bg-blue-100={themeKey === $theme}
-							role="menuitem"
-							tabindex="-1"
-							id="menu-item-0">{themeKey}</button
+						Theme ({$theme})
+						<svg
+							class="-mr-1 h-5 w-5 text-gray-400"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
 						>
-					{/each}
+							<path
+								fill-rule="evenodd"
+								d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div
+					class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class:hidden={hideColorSelectBox}
+					role="menu"
+					aria-orientation="vertical"
+					aria-labelledby="menu-button"
+					tabindex="-1"
+				>
+					<div class="py-1" role="none">
+						{#each Object.keys(themes) as themeKey}
+							<button
+								on:click={() => select_theme(themeKey)}
+								class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
+								class:bg-blue-100={themeKey === $theme}
+								role="menuitem"
+								tabindex="-1"
+								id="menu-item-0">{themeKey}</button
+							>
+						{/each}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="relative flex ">
-			<div class="">
-				<button
-					type="button"
-					class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-					id="menu-button"
-					aria-expanded="true"
-					aria-haspopup="true"
-					use:clickOutside
-					on:outclick={() => (hideTemplateSelectBox = true)}
-					on:click={() => (hideTemplateSelectBox ^= true)}
-				>
-					Template ({$template})
-					<svg
-						class="-mr-1 h-5 w-5 text-gray-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						aria-hidden="true"
+			<div class="relative flex ">
+				<div class="">
+					<button
+						type="button"
+						class="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+						id="menu-button"
+						aria-expanded="true"
+						aria-haspopup="true"
+						use:clickOutside
+						on:outclick={() => (hideTemplateSelectBox = true)}
+						on:click={() => (hideTemplateSelectBox ^= true)}
 					>
-						<path
-							fill-rule="evenodd"
-							d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</button>
-			</div>
-			<div
-				class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-				class:hidden={hideTemplateSelectBox}
-				role="menu"
-				aria-orientation="vertical"
-				aria-labelledby="menu-button"
-				tabindex="-1"
-			>
-				<div class="py-1" role="none">
-					{#each templates as templateKey}
-						<button
-							on:click={() => select_template(templateKey)}
-							class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
-							class:bg-blue-100={templateKey === $template}
-							role="menuitem"
-							tabindex="-1"
-							id="menu-item-0">{templateKey}</button
+						Template ({$template})
+						<svg
+							class="-mr-1 h-5 w-5 text-gray-400"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
 						>
-					{/each}
+							<path
+								fill-rule="evenodd"
+								d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div
+					class="absolute right-0 z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class:hidden={hideTemplateSelectBox}
+					role="menu"
+					aria-orientation="vertical"
+					aria-labelledby="menu-button"
+					tabindex="-1"
+				>
+					<div class="py-1" role="none">
+						{#each templates as templateKey}
+							<button
+								on:click={() => select_template(templateKey)}
+								class="text-gray-700 block px-4 py-2 text-sm w-full text-left"
+								class:bg-blue-100={templateKey === $template}
+								role="menuitem"
+								tabindex="-1"
+								id="menu-item-0">{templateKey}</button
+							>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -263,12 +265,11 @@
 			class="bg-white flex flex-col max-w-3xl min-h-screen mx-auto  shadow border border-solid border-gray-100"
 		>
 			<div id="preview" class="page p-8">
-        {#if $template ==="Classic"}
-          <Basic/>
-        {:else}
-    
-				<Basic2 />
-        {/if}
+				{#if $template === 'Classic'}
+					<Basic />
+				{:else}
+					<Basic2 />
+				{/if}
 				<Experience />
 				<Education />
 				<Projects />
