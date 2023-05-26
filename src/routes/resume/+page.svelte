@@ -5,11 +5,10 @@
 	import { page } from '$app/stores';
 	import { resume_id } from '$lib/store';
 
-  $resume_id = Number($page.url.searchParams.get('id'))
-  
+	$resume_id = Number($page.url.searchParams.get('id'));
 </script>
 
-<div class="flex flex-col h-screen ">
+<div class="flex flex-col h-screen lg:w-full w-[1200px]">
 	<div class=" w-full ">
 		<NavBar />
 	</div>
