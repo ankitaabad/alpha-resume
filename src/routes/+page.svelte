@@ -18,7 +18,7 @@
 </script>
 
 <!-- <CustomPill></CustomPill> -->
-<div class="flex flex-col h-screen ">
+<div class="flex flex-col h-screen lg:w-full w-[1200px]">
 	<div class=" w-full ">
 		<NavBar />
 	</div>
