@@ -110,11 +110,6 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="block" title="Twitter" rel="noreferrer" target="_blank">
-							<Twitter class="text-xl text-gray-500 hover:text-blue-700 transition" />
-						</a>
-					</li>
-					<li>
 						<a
 							href="https://github.com/Arpita1311-cts"
 							class=""
