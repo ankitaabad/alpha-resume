@@ -205,30 +205,29 @@ const get_min_data = (name: string, max = 'Many') => {
 	};
 };
 
-export const templates = ["Classic","Modern" ]
+export const templates = ['Classic', 'Modern'];
 export const themes = {
-	"Classic": {
-		content: '#454545',
-		header: '#FF6000',
-		subheader: '#7B8FA1',
-		pills: '#FFA559',
-    link: '#FF6000'
+	Classic: {
+		header: '#20232A',
+		subheader: '#1d1d1d',
+		content: '#828385',
+		pills: '#20232A',
+		link: '#427fed',
 	},
-  "Elegant": {
-    content:"#454545",
-    header:"#EA5455",
-    subheader: "#002B5B",
-    pills: "#576CBC",
-    link: "#EA5455"
-  },
-  "Modern" :{
-    content : "#454545",
-    header: "#19456B",
-    subheader: "#11698E",
-    pills: "#16C79A",
-    link: "#19456B"
-  }
-
+	Elegant: {
+		header: '#2E77A1',
+		subheader: '#6C8FA3',
+		content: '#333333',
+		pills: '#2E77A1',
+		link: '#FF7043',
+	},
+	Modern: {
+		header: '#8b5cf6',
+		subheader: '#4b5563',
+		content: '#4b5563',
+		pills: '#8b5cf6',
+		link: '#8b5cf6',
+	},
 };
 export const get_blank_resume = (resume_name) => {
 	return {
@@ -237,7 +236,7 @@ export const get_blank_resume = (resume_name) => {
 		settings: {
 			font: 'inter',
 			theme: 'Hyper Orange',
-      template: 'Classic'
+			template: 'Classic',
 		},
 		sections: [
 			{ ...get_min_data('Basic', 'One'), items: [get_blank_basic()] },
